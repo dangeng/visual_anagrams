@@ -46,11 +46,11 @@ def save_illusion(image, views, sample_dir):
     size = image.shape[-1]
 
     # Save illusion
-    save_image(image / 2. + 0.5, sample_dir / f'sample_{size}.png')
+    save_image(image / 2. + 0.5, sample_dir / f'sample_{size}.png', padding=0)
 
     # Save views of the illusion
     im_views = torch.stack([view.view(image[0]) for view in views])
-    save_image(im_views / 2. + 0.5, sample_dir / f'sample_{size}.views.png')
+    save_image(im_views / 2. + 0.5, sample_dir / f'sample_{size}.views.png', padding=0)
 
 def save_metadata(views, args, save_dir):
     '''
