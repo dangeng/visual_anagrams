@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="Optical illusions zero-shot from diffusion models.">
+  <meta name="keywords" content="Diffusion, Illusions, Optical Illusions">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Visual Anagrams: Synthesizing Multi-View Optical Illusions with Diffusion Models</title>
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <!--
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-PYVRSFMDRL');
+  </script>
+-->
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <!--<link rel="icon" href="./static/images/favicon.svg">-->
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title">Visual Anagrams: Synthesizing Multi-View Optical Illusions with Diffusion Models</h1>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">
+              <a href="https://dangeng.github.io" target="_blank">Daniel Geng</a>,</span>
+            <span class="author-block">
+              <a href="https://inbumpark.github.io/" target="_blank">Inbum Park</a>,</span>
+            <span class="author-block">
+              <a href="https://andrewowens.com" target="_blank">Andrew Owens</a>,</span>
+          </div>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">University of Michigan</span>
+          </div>
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <!-- PDF Link. -->
+              <span class="link-block">
+                <a href="https://arxiv.org/"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Paper</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href="https://arxiv.org/"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv</span>
+                </a>
+              </span>
+              <!-- Video Link. -->
+              <span class="link-block">
+                <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-youtube"></i>
+                  </span>
+                  <span>Video</span>
+                </a>
+              </span>
+              <!-- Code Link. -->
+              <span class="link-block">
+                <a href="https://github.com/dangeng/visual_anagrams"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code</span>
+                  </a>
+              </span>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- TEASER + INTRO -->
+<section class="hero teaser">
+  <h2 class="subtitle has-text-centered">
+    <b>tl;dr:</b> We use pretrained diffusion models to make optical illusions
+  </h2>
+  <div class="illusion-array">
+    <video class="grid-video" autoplay muted loop playsinline>
+      <source src="./static/videos/website_teaser.mp4"
+              type="video/mp4">
+    </video>
+  </div>
+</section>
+
+
+<!-- OVERVIEW -->
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Overview</h2>
+        <div class="content has-text-justified">
+          <p>
+          We present a simple, zero-shot method to generate <i>multi-view optical illusions</i>. 
+          These are images that look like one thing, but change appearance or identity when
+          transformed. We <a href="">show</a> that our method supports a broad range of transformations 
+          including <a href="#rot90_examples">rotations</a>, <a href="#flip_examples">flips</a>, 
+          <a href="#inversion_examples">color inversions</a>, <a href="#misc_examples">skews</a>, 
+          <a href="#jigsaw_examples">jigsaw rearrangements</a>, and 
+          <a href="#perm_examples">random permutations</a>. We show some examples below.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COLOR INVERSION -->
+<section class="hero is-small">
+  <div class="hero-body">
+    <div class="container">
+      <div class="columns is-centered has-text-centered">
+        <h2 class="title is-3" id="inversion_examples">Color Inversions</h2>
+      </div>
+      <div id="inversion" class="carousel results-carousel">
+        <div class="item">
+          <video poster="" id="photo.man.woman" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/negate/photo.man.woman.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item">
+          <video poster="" id="lithograph.rabbit.teddy" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/negate/lithograph.rabbit.teddy.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item">
+          <video poster="" id="lithograph.landscape.houseplants" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/negate/lithograph.landscape.houseplants.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item">
+          <video poster="" id="lithograph.waterfalls.table" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/negate/lithograph.waterfalls.table.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 90 DEGREE CAROUSEL -->
+<section class="hero is-small">
+  <div class="hero-body">
+    <div class="container">
+      <div class="columns is-centered has-text-centered">
+        <h2 class="title is-3" id="rot90_examples">90° Rotations</h2>
+      </div>
+      <div id="rotate_cw" class="carousel results-carousel">
+        <div class="item">
+          <video poster="" id="theater.library" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/rotate90/theater.library.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item">
+          <video poster="" id="village.horse" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/rotate90/village.horse.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item">
+          <video poster="" id="village.ship" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/rotate90/village.ship.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item">
+          <video poster="" id="village.ship.1" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/rotate90/village.ship.1.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- JIGSAW -->
+<section class="hero is-small">
+  <div class="hero-body">
+    <div class="container">
+      <div class="columns is-centered has-text-centered">
+        <h2 class="title is-3" id="jigsaw_examples">Jigsaw Permutations</h2>
+      </div>
+      <div id="jigsaw" class="carousel results-carousel">
+        <div class="item">
+          <video poster="" id="jigsaw.woman.lincoln" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/jigsaw/woman.lincoln.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item">
+          <video poster="" id="jigsaw.plants.einstein" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/jigsaw/plants.einstein.1.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item">
+          <video poster="" id="jigsaw.kitchen.deer" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/jigsaw/kitchen.deer.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item">
+          <video poster="" id="jigsaw.flower.quokka" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/jigsaw/flower.quokka.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item">
+          <video poster="" id="jigsaw.houseplants.marilyn" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/jigsaw/houseplants.marilyn.0.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item">
+          <video poster="" id="jigsaw.fruit.monkey" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/jigsaw/fruit.monkey.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item">
+          <video poster="" id="jigsaw.plants.deer" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/jigsaw/plants.deer.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- 180 Rotations -->
+<section class="hero is-small">
+  <div class="hero-body">
+    <div class="container">
+      <div class="columns is-centered has-text-centered">
+        <h2 class="title is-3" id="flip_examples">180° Rotations</h2>
+      </div>
+      <div id="rotate_180" class="carousel results-carousel">
+        <div class="item">
+          <video poster="" id="flip.campfire.man" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/flips/campfire.man.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item">
+          <video poster="" id="flip.dress.woman" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/flips/dress.woman.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item">
+          <video poster="" id="flip.giraffe.penguin" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/flips/giraffe.penguin.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item">
+          <video poster="" id="flip.kitchen.botanical" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/flips/kitchen.botanical.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item">
+          <video poster="" id="flip.truck.deer" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/flips/truck.deer.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item">
+          <video poster="" id="flip.vases.sloth" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/flips/vases.sloth.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item">
+          <video poster="" id="flip.mj.einstein" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/flips/mj.einstein.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item">
+          <video poster="" id="flip.house.castle" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/flips/house.castle.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item">
+          <video poster="" id="flip.winecheese.turtle" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/flips/winecheese.turtle.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item">
+          <video poster="" id="flip.ship.bird" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/flips/ship.bird.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item">
+          <video poster="" id="flip.rabbit.violin" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/flips/rabbit.violin.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item">
+          <video poster="" id="flip.lady.woman" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/flips/lady.woman.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item">
+          <video poster="" id="flip.kitchenware.panda" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/flips/kitchenware.redpanda.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item">
+          <video poster="" id="flip.fruit.monkey" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/flips/fruit.monkey.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item">
+          <video poster="" id="flip.fire.car" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/flips/fire.car.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item">
+          <video poster="" id="flip.fish.duck" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/flips/fish.duck.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<!-- MISC PERMS -->
+<section class="hero is-small">
+  <div class="hero-body">
+    <div class="container">
+      <div class="columns is-centered has-text-centered">
+        <h2 class="title is-3" id="misc_examples">Miscellaneous Permutations</h2>
+      </div>
+      <div id="misc-perms" class="carousel results-carousel">
+        <div class="item">
+          <video poster="" id="circle.einstein.marilyn.1" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/inner_circle/einstein.marilyn.1.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item">
+          <video poster="" id="circle.man.chair" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/inner_circle/man.chair.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item">
+          <video poster="" id="skew.tudor.skull" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/skew/tudor.skull.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item">
+          <video poster="" id="circle.einstein.marilyn" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/inner_circle/einstein.marilyn.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<!-- RANDOM PERMS -->
+<section class="hero is-small">
+  <div class="hero-body">
+    <div class="container">
+      <div class="columns is-centered has-text-centered">
+        <h2 class="title is-3" id="perm_examples">Random Patch Permutations</h2>
+      </div>
+      <div id="misc-perms" class="carousel results-carousel">
+        <div class="item">
+          <video poster="" id="patch8.rabbit.duck" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/8x8patch/rabbit.duck.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item">
+          <video poster="" id="patch8.kangaroo.lemur" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/8x8patch/kangaroo.lemur.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item">
+          <video poster="" id="patch32.man.old" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/32x32patch/man.old.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item">
+          <video poster="" id="patch64.duck.rabbit" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/64x64patch/duck.rabbit.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item">
+          <video poster="" id="patch8.man.old" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/8x8patch/man.old.1.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item">
+          <video poster="" id="patch8.zebra.motorcycle" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/8x8patch/zebra.motorcycle.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item">
+          <video poster="" id="patch16.man.old" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/16x16patch/man.old.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item">
+          <video poster="" id="patch64.soccer.panda" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/64x64patch/soccer.panda.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item">
+          <video poster="" id="patch64.lady.woman" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/64x64patch/lady.woman.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<!-- METHOD -->
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3 has-text-centered">Method</h2>
+        <div class="content has-text-justified">
+          <img src="./static/images/method.jpg" class="center-img"/>
+          <p>
+            Our method is conceptually simple. We take an off-the-shelf diffusion model and use it
+            to estimate the noise in different views or transformations, \(v_i\), of an image. 
+            The noise estimates are then aligned by applying the inverse view, \(v_i^{-1}\),
+            and averaged together. This averaged noise estimate is then used to take a diffusion step.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONDITIONS -->
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3 has-text-centered">Conditions on Views</h2>
+        <div class="content has-text-justified">
+          <p>
+            We find that not every view function works with the above method. Of course, \(v_i\) must
+            be invertible, but we discuss two additional constraints.
+          </p>
+        </div>
+        <h2 class="title is-4">Linearity</h2>
+        <div class="content has-text-justified">
+          <p>
+            A diffusion model is trained to estimate the noise in noisy data \(\mathbf{x}_t\) conditioned 
+            on time step \(t\). The noisy data \(\mathbf{x}_t\) is expected to have the form 
+            \[\mathbf{x}_t = w_t^{\text{signal}}\underbrace{\mathbf{x}_0}_{\text{signal}} + w_t^{\text{noise}}\underbrace{\epsilon\vphantom{\mathbf{x}_0}}_{\text{noise}}.\]
+            That is, \(\mathbf{x}_t\) is a weighted average of pure signal \(\mathbf{x_0}\) 
+            and pure noise \(\epsilon\), specifically with weights \(w_t^{\text{signal}}\) and \(w_t^{\text{noise}}\). 
+            Therefore, our view, \(v\) must maintain this weighting between signal and noise. This can be achieved
+            by making \(v\) linear, which we represent by the square matrix \(\mathbf{A}\). By linearity
+            \[v(\mathbf{x}_t) = \mathbf{A}(w_t^{\text{signal}} \mathbf{x}_0+w_t^{\text{noise}} \epsilon) = w_t^{\text{signal}} \underbrace{\mathbf{A}\mathbf{x}_0}_{\text{new signal}} + w_t^{\text{noise}} \underbrace{\mathbf{A}\epsilon}_{\text{new noise}}.\]
+            Effectively, \(v\) acts on the signal and the noise independently, and combines the result with the correct weighting.
+          </p>
+        </div>
+        <h2 class="title is-4">Statistical Consistency</h2>
+        <div class="content has-text-justified">
+          <p>
+            Diffusion models are trained with the assumption that the noise is drawn iid from a standard normal.
+            Therefore we must ensure that the transformed noise also follows these statistics. That is, we need
+            \[\mathbf{A}\epsilon \sim \mathcal{N}(0, I).\]
+            For linear transformations, this is equivalent to the condition that \(\mathbf{A}\) is orthogonal.
+            Intuitively, orthogonal matrices respect the spherical symmetry of the standard multivariate Gaussian distribution.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ORTHOGONAL -->
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3 has-text-centered">Orthogonal Transformations</h2>
+        <div class="content has-text-justified">
+          <p>
+            Most orthogonal transformations on images are meaningless, visually. For example, we transform
+            the image below with a randomly sampled orthogonal matrix.
+          </p>
+        </div>
+        <div class="content has-text-justified">
+          <img src="./static/images/orthogonal.jpeg" class="center-img"/>
+        </div>
+        <div class="content has-text-justified">
+          <p>
+            However, <b>permutations matrices are a subset of orthogonal matrices,</b> and are quite interpretable. 
+            They are just rearrangements of pixels in an image. This is where the idea of a <b>visual anagram</b>
+            comes from. The majority of illusions here can be interpreted this way—as specific rearrangements of pixels—such as
+            <a href="#rot90_examples">rotations</a>, <a href="#flip_examples">flips</a>, 
+            <a href="#misc_examples">skews</a>, <a href="#misc_examples">"inner rotations,"</a> 
+            <a href="#jigsaw_examples">jigsaw rearrangements</a>, and 
+            <a href="#perm_examples">patch permutations</a>. Finally, <a href="#inversion_examples">color inversions</a>
+            are not permutations, but are orthogonal as they are a negation of pixel values.
+            
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- Paper video. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Video (Coming Soon!)</h2>
+        <div class="publication-video">
+          <!--<iframe src="https://www.youtube.com/embed/jNQXAC9IVRw?si=8Dnrd2U1f2My6KUC"
+                  frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>-->
+          <iframe src="https://www.youtube.com/embed/1234567890"
+                  frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        </div>
+      </div>
+    </div>
+    <!--/ Paper video. -->
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- Concurrent Work. -->
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3">Related Links</h2>
+
+        <div class="content has-text-justified">
+          <p>
+            This project is inspired by previous work in this area, inclduing:
+          </p>
+          <p>
+            <a href="https://diffusionillusions.com/" target="_blank">Diffusion Illusions</a>, 
+            by <a href="https://ryanndagreat.github.io/" target="_blank">Ryan Burgert</a> <i>et al.</i>,
+            which produces multi-view illusions, along with other visual effects, through score distillation sampling.
+          </p>
+          <p>
+            This <a href="https://github.com/tancik/Illusion-Diffusion" target="_blank">colab notebook</a> by 
+            <a href="https://www.matthewtancik.com/about-me" target="_blank">Matthew Tancik</a>, 
+            which introduces a similar idea to ours. We improve upon it significantly in 
+            terms of quality of illusions, range of transformations, and theoretical analysis.
+          </p>
+          <p>
+            <a href="https://www.reddit.com/r/StableDiffusion/comments/16ew9fz/spiral_town_different_approach_to_qr_monster/" target="_blank">Recent work by a pseudonymous artist</a>, Ugleh,
+            uses a Stable Diffusion model finetuned for generating QR codes to produce images whose global structure subtly matches a given template image.
+          </p>
+        </div>
+      </div>
+    </div>
+    <!--/ Concurrent Work. -->
+
+  </div>
+</section>
+
+
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h2 class="title">BibTeX</h2>
+    <!--
+    <pre><code>@article{park2021nerfies,
+  author    = {Park, Keunhong and Sinha, Utkarsh and Barron, Jonathan T. and Bouaziz, Sofien and Goldman, Dan B and Seitz, Steven M. and Martin-Brualla, Ricardo},
+  title     = {Nerfies: Deformable Neural Radiance Fields},
+  journal   = {ICCV},
+  year      = {2021},
+}</code></pre>
+    -->
+    Coming soon!
+  </div>
+</section>
+
+
+<footer class="footer">
+  <div class="container">
+    <div class="content has-text-centered">
+      <a class="icon-link"
+         href="./static/videos/nerfies_paper.pdf">
+        <i class="fas fa-file-pdf"></i>
+      </a>
+      <a class="icon-link" href="https://github.com/keunhong" class="external-link" disabled>
+        <i class="fab fa-github"></i>
+      </a>
+    </div>
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+          <p>
+            This website is licensed under a <a rel="license"
+                                                href="http://creativecommons.org/licenses/by-sa/4.0/">Creative
+            Commons Attribution-ShareAlike 4.0 International License</a>.
+          </p>
+          <p>
+            This means you are free to borrow the <a
+              href="https://github.com/nerfies/nerfies.github.io">source code</a> of this website,
+            we just ask that you link back to this page in the footer.
+            Please remember to remove the analytics code included in the header of the website which
+            you do not want on your website.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

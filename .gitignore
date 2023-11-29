@@ -1,3 +1,4 @@
-results/
-.vscode/
-__pycache__/
+.DS_store
+.idea
+
+*.swp
