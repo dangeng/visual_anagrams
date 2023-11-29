@@ -166,11 +166,11 @@ body {
   width: 100%;
 }
 
-@media screen and (max-width: 544px) {
+/*@media screen and (max-width: 544px) {
   .grid-video {
     width: 180px;
   }
-}
+}*/
 
 .slider-item {
   width: auto !important;
@@ -191,3 +191,4 @@ body {
   margin-right: auto;
   width: 100%;
 }
+

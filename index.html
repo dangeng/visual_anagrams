@@ -548,7 +548,7 @@
             and pure noise \(\epsilon\), specifically with weights \(w_t^{\text{signal}}\) and \(w_t^{\text{noise}}\). 
             Therefore, our view, \(v\) must maintain this weighting between signal and noise. This can be achieved
             by making \(v\) linear, which we represent by the square matrix \(\mathbf{A}\). By linearity
-            \[v(\mathbf{x}_t) = \mathbf{A}(w_t^{\text{signal}} \mathbf{x}_0+w_t^{\text{noise}} \epsilon) = w_t^{\text{signal}} \underbrace{\mathbf{A}\mathbf{x}_0}_{\text{new signal}} + w_t^{\text{noise}} \underbrace{\mathbf{A}\epsilon}_{\text{new noise}}.\]
+            \[\begin{aligned} v(\mathbf{x}_t) &= \mathbf{A}(w_t^{\text{signal}} \mathbf{x}_0+w_t^{\text{noise}} \epsilon)\\ &= w_t^{\text{signal}} \underbrace{\mathbf{A}\mathbf{x}_0}_{\text{new signal}} + w_t^{\text{noise}} \underbrace{\mathbf{A}\epsilon}_{\text{new noise}}. \end{aligned}\]
             Effectively, \(v\) acts on the signal and the noise independently, and combines the result with the correct weighting.
           </p>
         </div>
