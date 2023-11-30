@@ -22,7 +22,7 @@
 
     gtag('config', 'G-PYVRSFMDRL');
   </script>
--->
+  -->
 
   <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
         rel="stylesheet">
@@ -124,7 +124,7 @@
   </h2>
   <div class="container is-max-desktop">
     <video class="grid-video" autoplay muted loop playsinline>
-      <source src="./static/videos/website_teaser.192.mp4"
+      <source src="./static/videos/website_teaser.256.mp4"
               type="video/mp4">
     </video>
   </div>
@@ -141,7 +141,7 @@
           <p>
           We present a simple, zero-shot method to generate <i>multi-view optical illusions</i>. 
           These are images that look like one thing, but change appearance or identity when
-          transformed. We <a href="">show</a> that our method supports a broad range of transformations 
+          transformed. We <a href="#method">show in theory</a> and practice that our method supports a broad range of transformations 
           including <a href="#rot90_examples">rotations</a>, <a href="#flip_examples">flips</a>, 
           <a href="#inversion_examples">color inversions</a>, <a href="#misc_examples">skews</a>, 
           <a href="#jigsaw_examples">jigsaw rearrangements</a>, and 
@@ -153,19 +153,6 @@
   </div>
 </section>
 
-
-<!-- 90 DEGREE GRID -->
-<section class="section">
-  <div class="container">
-    <div class="columns is-centered has-text-centered">
-      <h2 class="title is-3" id="rot90_examples">90° Rotations</h2>
-    </div>
-    <video class="grid-video" autoplay muted loop playsinline>
-      <source src="./static/videos/grids/rotate90.grid.mp4"
-              type="video/mp4">
-    </video>
-  </div>
-</section>
 
 <!-- JIGSAW GRID -->
 <section class="section">
@@ -184,7 +171,7 @@
 <section class="section">
   <div class="container">
     <div class="columns is-centered has-text-centered">
-      <h2 class="title is-3" id="jigsaw_examples">Flips and 180° Rotations</h2>
+      <h2 class="title is-3" id="flip_examples">Flips and 180° Rotations</h2>
     </div>
     <video class="grid-video" autoplay muted loop playsinline>
       <source src="./static/videos/grids/flips.grid.0.mp4"
@@ -197,11 +184,24 @@
   </div>
 </section>
 
+<!-- 90 DEGREE GRID -->
+<section class="section">
+  <div class="container">
+    <div class="columns is-centered has-text-centered">
+      <h2 class="title is-3" id="rot90_examples">90° Rotations</h2>
+    </div>
+    <video class="grid-video" autoplay muted loop playsinline>
+      <source src="./static/videos/grids/rotate90.grid.mp4"
+              type="video/mp4">
+    </video>
+  </div>
+</section>
+
 <!-- INVERSIONS GRID -->
 <section class="section">
   <div class="container">
     <div class="columns is-centered has-text-centered">
-      <h2 class="title is-3" id="jigsaw_examples">Color Inversions</h2>
+      <h2 class="title is-3" id="inversion_examples">Color Inversions</h2>
     </div>
     <video class="grid-video" autoplay muted loop playsinline>
       <source src="./static/videos/grids/invert.grid.mp4"
@@ -214,7 +214,7 @@
 <section class="section">
   <div class="container">
     <div class="columns is-centered has-text-centered">
-      <h2 class="title is-3" id="jigsaw_examples">Miscellaneous Permutations</h2>
+      <h2 class="title is-3" id="misc_examples">Miscellaneous Permutations</h2>
     </div>
     <video class="grid-video" autoplay muted loop playsinline>
       <source src="./static/videos/grids/misc.grid.mp4"
@@ -227,7 +227,7 @@
 <section class="section">
   <div class="container">
     <div class="columns is-centered has-text-centered">
-      <h2 class="title is-3" id="jigsaw_examples">Random Patch Permutations</h2>
+      <h2 class="title is-3" id="perm_examples">Random Patch Permutations</h2>
     </div>
     <video class="grid-video" autoplay muted loop playsinline>
       <source src="./static/videos/grids/patch.grid.mp4"
@@ -241,7 +241,7 @@
   <div class="container is-max-desktop">
     <div class="columns is-centered">
       <div class="column is-four-fifths">
-        <h2 class="title is-3 has-text-centered">Method</h2>
+        <h2 class="title is-3 has-text-centered" id="method">Method</h2>
         <div class="content has-text-justified">
           <img src="./static/images/method.jpg" class="center-img"/>
           <p>
