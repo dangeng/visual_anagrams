@@ -193,3 +193,14 @@ body {
   width: 100%;
 }
 
+
+.teaser {
+  width: 100%;
+  max-width: 100%;
+  text-align: center;
+}
+
+.grid-video {
+  width: 100%;
+  max-width: 768px;
+}
