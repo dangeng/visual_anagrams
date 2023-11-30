@@ -8,21 +8,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Visual Anagrams: Synthesizing Multi-View Optical Illusions with Diffusion Models</title>
 
-  <!-- Global site tag (gtag.js) - Google Analytics -->
-  <!--
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-8P4QSMJ1ZN"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
-
-    function gtag() {
-      dataLayer.push(arguments);
-    }
-
+    function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
 
-    gtag('config', 'G-PYVRSFMDRL');
+    gtag('config', 'G-8P4QSMJ1ZN');
   </script>
--->
 
   <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
         rel="stylesheet">
@@ -70,7 +64,8 @@
             <div class="publication-links">
               <!-- PDF Link. -->
               <span class="link-block">
-                <a href="https://arxiv.org/"
+                <a href="https://arxiv.org/pdf/2311.17919"
+                   target="_blank"
                    class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">
                       <i class="fas fa-file-pdf"></i>
@@ -79,7 +74,8 @@
                 </a>
               </span>
               <span class="link-block">
-                <a href="https://arxiv.org/"
+                <a href="https://arxiv.org/abs/2311.17919"
+                   target="_blank"
                    class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">
                       <i class="ai ai-arxiv"></i>
@@ -88,23 +84,45 @@
                 </a>
               </span>
               <!-- Video Link. -->
+              <!--
               <span class="link-block">
-                <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+                <a href="#"
                    class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">
                       <i class="fab fa-youtube"></i>
                   </span>
-                  <span>Video</span>
+                  <span>Video (Coming Soon)</span>
                 </a>
               </span>
+              -->
               <!-- Code Link. -->
               <span class="link-block">
                 <a href="https://github.com/dangeng/visual_anagrams"
-                   class="external-link button is-normal is-rounded is-dark">
+                   target="_blank" class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">
                       <i class="fab fa-github"></i>
                   </span>
                   <span>Code</span>
+                  </a>
+              </span>
+              <!-- Colab Link. -->
+              <span class="link-block">
+                <a href="https://colab.research.google.com/drive/1hCvJR5GsQrhH1ceDjdbzLG8y6m2UdJ6l?usp=sharing"
+                   target="_blank" class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-book"></i>
+                  </span>
+                  <span>Colab</span>
+                  </a>
+              </span>
+              <!-- Cutout Link. -->
+              <span class="link-block">
+                <a href="./static/assets/jigsaw.pdf"
+                   target="_blank" class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-puzzle-piece"></i>
+                  </span>
+                  <span>Print a Jigsaw!</span>
                   </a>
               </span>
             </div>
@@ -120,11 +138,11 @@
 <!-- TEASER + INTRO -->
 <section class="hero teaser">
   <h2 class="subtitle has-text-centered">
-    <b>tl;dr:</b> We use pretrained diffusion models to make optical illusions
+    <b>tl;dr:</b> We use pretrained diffusion models<br>to make optical illusions
   </h2>
-  <div class="illusion-array">
-    <video class="grid-video" autoplay muted loop playsinline>
-      <source src="./static/videos/website_teaser.mp4"
+  <div class="is-centered is-max-desktop teaser">
+    <video class="teaser-video" autoplay muted loop playsinline>
+      <source src="./static/videos/website_teaser.256.mp4"
               type="video/mp4">
     </video>
   </div>
@@ -141,7 +159,7 @@
           <p>
           We present a simple, zero-shot method to generate <i>multi-view optical illusions</i>. 
           These are images that look like one thing, but change appearance or identity when
-          transformed. We <a href="">show</a> that our method supports a broad range of transformations 
+          transformed. We <a href="#method">show in theory</a> and practice that our method supports a broad range of transformations 
           including <a href="#rot90_examples">rotations</a>, <a href="#flip_examples">flips</a>, 
           <a href="#inversion_examples">color inversions</a>, <a href="#misc_examples">skews</a>, 
           <a href="#jigsaw_examples">jigsaw rearrangements</a>, and 
@@ -153,362 +171,151 @@
   </div>
 </section>
 
-<!-- COLOR INVERSION -->
-<section class="hero is-small">
-  <div class="hero-body">
-    <div class="container">
-      <div class="columns is-centered has-text-centered">
-        <h2 class="title is-3" id="inversion_examples">Color Inversions</h2>
-      </div>
-      <div id="inversion" class="carousel results-carousel">
-        <div class="item">
-          <video poster="" id="photo.man.woman" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/negate/photo.man.woman.mp4"
-                    type="video/mp4">
-          </video>
-        </div>
-        <div class="item">
-          <video poster="" id="lithograph.rabbit.teddy" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/negate/lithograph.rabbit.teddy.mp4"
-                    type="video/mp4">
-          </video>
-        </div>
-        <div class="item">
-          <video poster="" id="lithograph.landscape.houseplants" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/negate/lithograph.landscape.houseplants.mp4"
-                    type="video/mp4">
-          </video>
-        </div>
-        <div class="item">
-          <video poster="" id="lithograph.waterfalls.table" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/negate/lithograph.waterfalls.table.mp4"
-                    type="video/mp4">
-          </video>
-        </div>
-      </div>
+
+<!-- JIGSAW GRID -->
+<section class="section">
+  <div class="container">
+    <div class="columns is-centered has-text-centered">
+      <h2 class="title is-3" id="jigsaw_examples">Jigsaw Permutations</h2>
+    </div>
+    <div class="columns is-centered">
+      <video class="grid-video" autoplay muted loop playsinline>
+        <source src="./static/videos/grids_half/jigsaw.grid.left.mp4"
+                type="video/mp4">
+      </video>
+    </div>
+    <div class="columns is-centered">
+      <video class="grid-video" autoplay muted loop playsinline>
+        <source src="./static/videos/grids_half/jigsaw.grid.right.mp4"
+                type="video/mp4">
+      </video>
     </div>
   </div>
 </section>
 
-<!-- 90 DEGREE CAROUSEL -->
-<section class="hero is-small">
-  <div class="hero-body">
-    <div class="container">
-      <div class="columns is-centered has-text-centered">
-        <h2 class="title is-3" id="rot90_examples">90° Rotations</h2>
-      </div>
-      <div id="rotate_cw" class="carousel results-carousel">
-        <div class="item">
-          <video poster="" id="theater.library" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/rotate90/theater.library.mp4"
-                    type="video/mp4">
-          </video>
-        </div>
-        <div class="item">
-          <video poster="" id="village.horse" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/rotate90/village.horse.mp4"
-                    type="video/mp4">
-          </video>
-        </div>
-        <div class="item">
-          <video poster="" id="village.ship" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/rotate90/village.ship.mp4"
-                    type="video/mp4">
-          </video>
-        </div>
-        <div class="item">
-          <video poster="" id="village.ship.1" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/rotate90/village.ship.1.mp4"
-                    type="video/mp4">
-          </video>
-        </div>
-      </div>
+<!-- FLIPS GRID -->
+<section class="section">
+  <div class="container">
+    <div class="columns is-centered has-text-centered">
+      <h2 class="title is-3" id="flip_examples">Flips and 180° Rotations</h2>
+    </div>
+    <div class="columns is-centered">
+      <video class="grid-video" autoplay muted loop playsinline>
+        <source src="./static/videos/grids_half/flips.grid.0.left.mp4"
+                type="video/mp4">
+      </video>
+    </div>
+    <div class="columns is-centered">
+      <video class="grid-video" autoplay muted loop playsinline>
+        <source src="./static/videos/grids_half/flips.grid.0.right.mp4"
+                type="video/mp4">
+      </video>
+    </div>
+    <div class="columns is-centered">
+      <video class="grid-video" autoplay muted loop playsinline>
+        <source src="./static/videos/grids_half/flips.grid.1.left.mp4"
+                type="video/mp4">
+      </video>
+    </div>
+    <div class="columns is-centered">
+      <video class="grid-video" autoplay muted loop playsinline>
+        <source src="./static/videos/grids_half/flips.grid.1.right.mp4"
+                type="video/mp4">
+      </video>
     </div>
   </div>
 </section>
 
-
-<!-- JIGSAW -->
-<section class="hero is-small">
-  <div class="hero-body">
-    <div class="container">
-      <div class="columns is-centered has-text-centered">
-        <h2 class="title is-3" id="jigsaw_examples">Jigsaw Permutations</h2>
-      </div>
-      <div id="jigsaw" class="carousel results-carousel">
-        <div class="item">
-          <video poster="" id="jigsaw.woman.lincoln" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/jigsaw/woman.lincoln.mp4"
-                    type="video/mp4">
-          </video>
-        </div>
-        <div class="item">
-          <video poster="" id="jigsaw.plants.einstein" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/jigsaw/plants.einstein.1.mp4"
-                    type="video/mp4">
-          </video>
-        </div>
-        <div class="item">
-          <video poster="" id="jigsaw.kitchen.deer" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/jigsaw/kitchen.deer.mp4"
-                    type="video/mp4">
-          </video>
-        </div>
-        <div class="item">
-          <video poster="" id="jigsaw.flower.quokka" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/jigsaw/flower.quokka.mp4"
-                    type="video/mp4">
-          </video>
-        </div>
-        <div class="item">
-          <video poster="" id="jigsaw.houseplants.marilyn" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/jigsaw/houseplants.marilyn.0.mp4"
-                    type="video/mp4">
-          </video>
-        </div>
-        <div class="item">
-          <video poster="" id="jigsaw.fruit.monkey" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/jigsaw/fruit.monkey.mp4"
-                    type="video/mp4">
-          </video>
-        </div>
-        <div class="item">
-          <video poster="" id="jigsaw.plants.deer" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/jigsaw/plants.deer.mp4"
-                    type="video/mp4">
-          </video>
-        </div>
-      </div>
+<!-- 90 DEGREE GRID -->
+<section class="section">
+  <div class="container">
+    <div class="columns is-centered has-text-centered">
+      <h2 class="title is-3" id="rot90_examples">90° Rotations</h2>
+    </div>
+    <div class="columns is-centered">
+      <video class="grid-video" autoplay muted loop playsinline>
+        <source src="./static/videos/grids_half/rotate90.grid.left.mp4"
+                type="video/mp4">
+      </video>
+    </div>
+    <div class="columns is-centered">
+      <video class="grid-video" autoplay muted loop playsinline>
+        <source src="./static/videos/grids_half/rotate90.grid.right.mp4"
+                type="video/mp4">
+      </video>
     </div>
   </div>
 </section>
 
-
-<!-- 180 Rotations -->
-<section class="hero is-small">
-  <div class="hero-body">
-    <div class="container">
-      <div class="columns is-centered has-text-centered">
-        <h2 class="title is-3" id="flip_examples">180° Rotations</h2>
-      </div>
-      <div id="rotate_180" class="carousel results-carousel">
-        <div class="item">
-          <video poster="" id="flip.campfire.man" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/flips/campfire.man.mp4"
-                    type="video/mp4">
-          </video>
-        </div>
-        <div class="item">
-          <video poster="" id="flip.dress.woman" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/flips/dress.woman.mp4"
-                    type="video/mp4">
-          </video>
-        </div>
-        <div class="item">
-          <video poster="" id="flip.giraffe.penguin" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/flips/giraffe.penguin.mp4"
-                    type="video/mp4">
-          </video>
-        </div>
-        <div class="item">
-          <video poster="" id="flip.kitchen.botanical" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/flips/kitchen.botanical.mp4"
-                    type="video/mp4">
-          </video>
-        </div>
-        <div class="item">
-          <video poster="" id="flip.truck.deer" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/flips/truck.deer.mp4"
-                    type="video/mp4">
-          </video>
-        </div>
-        <div class="item">
-          <video poster="" id="flip.vases.sloth" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/flips/vases.sloth.mp4"
-                    type="video/mp4">
-          </video>
-        </div>
-        <div class="item">
-          <video poster="" id="flip.mj.einstein" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/flips/mj.einstein.mp4"
-                    type="video/mp4">
-          </video>
-        </div>
-        <div class="item">
-          <video poster="" id="flip.house.castle" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/flips/house.castle.mp4"
-                    type="video/mp4">
-          </video>
-        </div>
-        <div class="item">
-          <video poster="" id="flip.winecheese.turtle" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/flips/winecheese.turtle.mp4"
-                    type="video/mp4">
-          </video>
-        </div>
-        <div class="item">
-          <video poster="" id="flip.ship.bird" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/flips/ship.bird.mp4"
-                    type="video/mp4">
-          </video>
-        </div>
-        <div class="item">
-          <video poster="" id="flip.rabbit.violin" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/flips/rabbit.violin.mp4"
-                    type="video/mp4">
-          </video>
-        </div>
-        <div class="item">
-          <video poster="" id="flip.lady.woman" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/flips/lady.woman.mp4"
-                    type="video/mp4">
-          </video>
-        </div>
-        <div class="item">
-          <video poster="" id="flip.kitchenware.panda" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/flips/kitchenware.redpanda.mp4"
-                    type="video/mp4">
-          </video>
-        </div>
-        <div class="item">
-          <video poster="" id="flip.fruit.monkey" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/flips/fruit.monkey.mp4"
-                    type="video/mp4">
-          </video>
-        </div>
-        <div class="item">
-          <video poster="" id="flip.fire.car" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/flips/fire.car.mp4"
-                    type="video/mp4">
-          </video>
-        </div>
-        <div class="item">
-          <video poster="" id="flip.fish.duck" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/flips/fish.duck.mp4"
-                    type="video/mp4">
-          </video>
-        </div>
-      </div>
+<!-- INVERSIONS GRID -->
+<section class="section">
+  <div class="container">
+    <div class="columns is-centered has-text-centered">
+      <h2 class="title is-3" id="inversion_examples">Color Inversions</h2>
+    </div>
+    <div class="columns is-centered">
+      <video class="grid-video" autoplay muted loop playsinline>
+        <source src="./static/videos/grids_half/invert.grid.left.mp4"
+                type="video/mp4">
+      </video>
+    </div>
+    <div class="columns is-centered">
+      <video class="grid-video" autoplay muted loop playsinline>
+        <source src="./static/videos/grids_half/invert.grid.right.mp4"
+                type="video/mp4">
+      </video>
     </div>
   </div>
 </section>
 
-
-
-<!-- MISC PERMS -->
-<section class="hero is-small">
-  <div class="hero-body">
-    <div class="container">
-      <div class="columns is-centered has-text-centered">
-        <h2 class="title is-3" id="misc_examples">Miscellaneous Permutations</h2>
-      </div>
-      <div id="misc-perms" class="carousel results-carousel">
-        <div class="item">
-          <video poster="" id="circle.einstein.marilyn.1" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/inner_circle/einstein.marilyn.1.mp4"
-                    type="video/mp4">
-          </video>
-        </div>
-        <div class="item">
-          <video poster="" id="circle.man.chair" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/inner_circle/man.chair.mp4"
-                    type="video/mp4">
-          </video>
-        </div>
-        <div class="item">
-          <video poster="" id="skew.tudor.skull" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/skew/tudor.skull.mp4"
-                    type="video/mp4">
-          </video>
-        </div>
-        <div class="item">
-          <video poster="" id="circle.einstein.marilyn" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/inner_circle/einstein.marilyn.mp4"
-                    type="video/mp4">
-          </video>
-        </div>
-      </div>
+<!-- MISC GRID -->
+<section class="section">
+  <div class="container">
+    <div class="columns is-centered has-text-centered">
+      <h2 class="title is-3" id="misc_examples">Miscellaneous Permutations</h2>
+    </div>
+    <div class="columns is-centered">
+      <video class="grid-video" autoplay muted loop playsinline>
+        <source src="./static/videos/grids_half/misc.grid.left.mp4"
+                type="video/mp4">
+      </video>
+    </div>
+    <div class="columns is-centered">
+      <video class="grid-video" autoplay muted loop playsinline>
+        <source src="./static/videos/grids_half/misc.grid.right.mp4"
+                type="video/mp4">
+      </video>
     </div>
   </div>
 </section>
 
-
-
-<!-- RANDOM PERMS -->
-<section class="hero is-small">
-  <div class="hero-body">
-    <div class="container">
-      <div class="columns is-centered has-text-centered">
-        <h2 class="title is-3" id="perm_examples">Random Patch Permutations</h2>
-      </div>
-      <div id="misc-perms" class="carousel results-carousel">
-        <div class="item">
-          <video poster="" id="patch8.rabbit.duck" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/8x8patch/rabbit.duck.mp4"
-                    type="video/mp4">
-          </video>
-        </div>
-        <div class="item">
-          <video poster="" id="patch8.kangaroo.lemur" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/8x8patch/kangaroo.lemur.mp4"
-                    type="video/mp4">
-          </video>
-        </div>
-        <div class="item">
-          <video poster="" id="patch32.man.old" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/32x32patch/man.old.mp4"
-                    type="video/mp4">
-          </video>
-        </div>
-        <div class="item">
-          <video poster="" id="patch64.duck.rabbit" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/64x64patch/duck.rabbit.mp4"
-                    type="video/mp4">
-          </video>
-        </div>
-        <div class="item">
-          <video poster="" id="patch8.man.old" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/8x8patch/man.old.1.mp4"
-                    type="video/mp4">
-          </video>
-        </div>
-        <div class="item">
-          <video poster="" id="patch8.zebra.motorcycle" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/8x8patch/zebra.motorcycle.mp4"
-                    type="video/mp4">
-          </video>
-        </div>
-        <div class="item">
-          <video poster="" id="patch16.man.old" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/16x16patch/man.old.mp4"
-                    type="video/mp4">
-          </video>
-        </div>
-        <div class="item">
-          <video poster="" id="patch64.soccer.panda" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/64x64patch/soccer.panda.mp4"
-                    type="video/mp4">
-          </video>
-        </div>
-        <div class="item">
-          <video poster="" id="patch64.lady.woman" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/64x64patch/lady.woman.mp4"
-                    type="video/mp4">
-          </video>
-        </div>
-      </div>
+<!-- PATCH GRID -->
+<section class="section">
+  <div class="container">
+    <div class="columns is-centered has-text-centered">
+      <h2 class="title is-3" id="perm_examples">Random Patch Permutations</h2>
     </div>
+    <div class="columns is-centered">
+      <video class="grid-video" autoplay muted loop playsinline>
+        <source src="./static/videos/grids_half/patch.grid.left.mp4"
+                type="video/mp4">
+      </video>
+    </div>  
+    <div class="columns is-centered">
+      <video class="grid-video" autoplay muted loop playsinline>
+        <source src="./static/videos/grids_half/patch.grid.right.mp4"
+                type="video/mp4">
+      </video>
+    </div>  
   </div>
 </section>
-
-
 
 <!-- METHOD -->
 <section class="section">
   <div class="container is-max-desktop">
     <div class="columns is-centered">
       <div class="column is-four-fifths">
-        <h2 class="title is-3 has-text-centered">Method</h2>
+        <h2 class="title is-3 has-text-centered" id="method">Method</h2>
         <div class="content has-text-justified">
           <img src="./static/images/method.jpg" class="center-img"/>
           <p>
@@ -545,7 +352,7 @@
             and pure noise \(\epsilon\), specifically with weights \(w_t^{\text{signal}}\) and \(w_t^{\text{noise}}\). 
             Therefore, our view, \(v\) must maintain this weighting between signal and noise. This can be achieved
             by making \(v\) linear, which we represent by the square matrix \(\mathbf{A}\). By linearity
-            \[v(\mathbf{x}_t) = \mathbf{A}(w_t^{\text{signal}} \mathbf{x}_0+w_t^{\text{noise}} \epsilon) = w_t^{\text{signal}} \underbrace{\mathbf{A}\mathbf{x}_0}_{\text{new signal}} + w_t^{\text{noise}} \underbrace{\mathbf{A}\epsilon}_{\text{new noise}}.\]
+            \[\begin{aligned} v(\mathbf{x}_t) &= \mathbf{A}(w_t^{\text{signal}} \mathbf{x}_0+w_t^{\text{noise}} \epsilon)\\[7pt] &= w_t^{\text{signal}} \underbrace{\mathbf{A}\mathbf{x}_0}_{\text{new signal}} + w_t^{\text{noise}} \underbrace{\mathbf{A}\epsilon}_{\text{new noise}}. \end{aligned}\]
             Effectively, \(v\) acts on the signal and the noise independently, and combines the result with the correct weighting.
           </p>
         </div>
@@ -557,6 +364,9 @@
             \[\mathbf{A}\epsilon \sim \mathcal{N}(0, I).\]
             For linear transformations, this is equivalent to the condition that \(\mathbf{A}\) is orthogonal.
             Intuitively, orthogonal matrices respect the spherical symmetry of the standard multivariate Gaussian distribution.
+          </p>
+          <p>
+            Therefore, for a transformation to work with our method, it is <b>sufficient for it to be orthogonal.</b>
           </p>
         </div>
       </div>
@@ -658,15 +468,15 @@
 <section class="section" id="BibTeX">
   <div class="container is-max-desktop content">
     <h2 class="title">BibTeX</h2>
-    <!--
-    <pre><code>@article{park2021nerfies,
-  author    = {Park, Keunhong and Sinha, Utkarsh and Barron, Jonathan T. and Bouaziz, Sofien and Goldman, Dan B and Seitz, Steven M. and Martin-Brualla, Ricardo},
-  title     = {Nerfies: Deformable Neural Radiance Fields},
-  journal   = {ICCV},
-  year      = {2021},
+    <pre><code>@article{geng2023visualanagrams,
+  title     = {Visual Anagrams: Generating Multi-View Optical Illusions with Diffusion Models},
+  author    = {Geng, Daniel and Park, Inbum and Owens, Andrew},
+  journal   = {arXiv:2311.17919},
+  year      = {2023},
+  month     = {Novemeber},
+  abbr      = {Preprint},
+  url       = {https://arxiv.org/abs/2311.17919},
 }</code></pre>
-    -->
-    Coming soon!
   </div>
 </section>
 
