@@ -164,6 +164,7 @@ body {
 
 .grid-video {
   width: 100%;
+  max-width: 768px;
 }
 
 /*@media screen and (max-width: 544px) {
