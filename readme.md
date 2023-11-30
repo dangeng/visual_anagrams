@@ -1,5 +1,14 @@
 # Visual Anagrams: Generating Multi-View Optical Illusions with Diffusion Models
 
+### [[Arxiv]](#) | [[Website]](https://dangeng.github.io/visual_anagrams/)
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1hCvJR5GsQrhH1ceDjdbzLG8y6m2UdJ6l?usp=sharing)
+
+<!--![illusions](./assets/teaser.small.gif)-->
+
+<!--<img src="./assets/teaser.small.gif"/>-->
+
+<video src="./assets/teaser.small.mp4" autoplay muted loop playsinline/>
+
 This is the official code for the paper "Visual Anagrams: Generating Multi-View Optical Illusions with Diffusion Models." 
 
 ## Installation
