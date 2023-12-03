@@ -166,7 +166,6 @@ dependencies:
       - attrs==23.1.0
       - chardet==5.2.0
       - charset-normalizer==3.3.0
-      - clip==1.0
       - diffusers==0.21.4
       - dominate==2.8.0
       - einops==0.7.0
