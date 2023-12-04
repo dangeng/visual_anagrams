@@ -204,3 +204,9 @@ body {
   width: 100%;
   max-width: 768px;
 }
+
+/* Thanks John Denero! */
+span.rev {
+  unicode-bidi: bidi-override;
+  direction: rtl;
+}
