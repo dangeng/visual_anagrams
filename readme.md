@@ -14,7 +14,7 @@ This repo contains code to generate visual anagrams and other multi-view optical
 
 ### Conda Environment
 
-Create a conda env by running:
+Create a conda env by running (only on Linux):
 
 ```
 conda env create -f environment.yml
