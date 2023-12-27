@@ -10,6 +10,7 @@ from .view_skew import SkewView
 from .view_patch_permute import PatchPermuteView
 from .view_jigsaw import JigsawView
 from .view_inner_circle import InnerCircleView
+from .view_square_hinge import SquareHingeView
 
 VIEW_MAP = {
     'identity': IdentityView,
@@ -23,6 +24,7 @@ VIEW_MAP = {
     'pixel_permute': PatchPermuteView,
     'jigsaw': JigsawView,
     'inner_circle': InnerCircleView,
+    'square_hinge': SquareHingeView,
 }
 
 def get_views(view_names):
