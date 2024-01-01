@@ -26,9 +26,9 @@ class BaseView:
             the noise, this function must apply the inverse to the
             variance as well.
 
-        im (`torch.tensor`):
+        noise (`torch.tensor`):
             Tensor of shape (6, H, W) representing the noise estimate
-            (first three channel dims) and variacne estimates (last
+            (first three channel dims) and variance estimates (last
             three channel dims)
         '''
         raise NotImplementedError()
@@ -38,10 +38,10 @@ class BaseView:
         Make a frame, transitioning linearly from the identity view (t=0) 
             to this view (t=1)
 
-        im (`PIL.Image`) :
+        im (`PIL.Image`):
             A PIL Image of the illusion
 
-        t (float) :
+        t (float):
             A float in [0,1] indicating time in the animation. Should start
             at the identity view at t=0, and continuously transition to the
             view at t=1.
