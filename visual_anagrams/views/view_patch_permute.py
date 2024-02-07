@@ -113,7 +113,7 @@ class PatchPermuteView(BaseView):
         start_locs = start_locs + offset
 
         # Get end locations by permuting
-        end_locs = start_locs[self.perm]
+        end_locs = start_locs[self.perm_inv]
 
         # Get random anchor locations
         original_state = np.random.get_state()
