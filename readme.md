@@ -2,13 +2,25 @@
 
 [Daniel Geng](https://dangeng.github.io/), [Aaron Park](https://inbumpark.github.io/), [Andrew Owens](https://andrewowens.com/)
 
-## [[Arxiv](https://arxiv.org/abs/2311.17919)] [[Website](https://dangeng.github.io/visual_anagrams/)] [[Colab](https://colab.research.google.com/drive/1hCvJR5GsQrhH1ceDjdbzLG8y6m2UdJ6l?usp=sharing)]
+## [[Arxiv](https://arxiv.org/abs/2311.17919)] [[Website](https://dangeng.github.io/visual_anagrams/)] [[Colab (Free Tier)](https://colab.research.google.com/github/dangeng/visual_anagrams/blob/main/notebooks/colab_demo_free_tier.ipynb)] [[Colab (Pro Tier)](https://colab.research.google.com/github/dangeng/visual_anagrams/blob/main/notebooks/colab_demo_pro_tier.ipynb)]
 
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1hCvJR5GsQrhH1ceDjdbzLG8y6m2UdJ6l?usp=sharing)
+[![Open In Colab (Free Tier)](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/dangeng/visual_anagrams/blob/main/notebooks/colab_demo_free_tier.ipynb) <sub>(Free Tier)</sub>
+
+[![Open In Colab (Pro Tier)](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/dangeng/visual_anagrams/blob/main/notebooks/colab_demo_pro_tier.ipynb) <sub>(Colab Pro)</sub>
 
 ![teaser](./assets/teaser.small.gif)
 
 This repo contains code to generate visual anagrams and other multi-view optical illusions. These are images that change appearance or identity when transformed, such as by a rotation, a color inversion, or a jigsaw rearrangement. Please read our paper or visit our website for more details.
+
+## Colab Demos
+
+We provide two colab demos. One was graciously written by [Tamizh N](https://github.com/tmzh), and memory efficient enough to be run with Colab Free Tier resources (at the cost of slightly more inconvenience):
+
+[![Open In Colab (Free Tier)](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/dangeng/visual_anagrams/blob/main/notebooks/colab_demo_free_tier.ipynb) <sub>(Free Tier)</sub>
+
+For people with, or willing to obtain, a Colab Pro subscription we also have the following notebook, which requires a High RAM and V100 runtime, but is slightly more convenient to use:
+
+[![Open In Colab (Pro Tier)](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/dangeng/visual_anagrams/blob/main/notebooks/colab_demo_pro_tier.ipynb) <sub>(Colab Pro)</sub>
 
 ## Installation
 
