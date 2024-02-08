@@ -134,9 +134,6 @@ def make_jigsaw_perm(size, seed=0):
     '''
     np.random.seed(seed)
 
-    # Get location of puzzle pieces
-    piece_dir = Path(__file__).parent / 'assets'
-
     # Get random permutations of groups of 4, and cat
     identity = np.arange(4)
     perm_corner = np.random.permutation(identity)

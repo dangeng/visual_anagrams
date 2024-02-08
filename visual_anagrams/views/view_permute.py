@@ -5,7 +5,7 @@ from .permutations import get_inv_perm
 from .view_base import BaseView
 
 class PermuteView(BaseView):
-    def __init__(self, perm_64, perm_256):
+    def __init__(self, perm_64, perm_256, perm_1024=None):
         '''
         Implements arbitrary pixel permutations, for a given permutation. 
             We need two permutations. One of size 64x64 for stage 1, and 
@@ -24,20 +24,35 @@ class PermuteView(BaseView):
         assert perm_256.shape == torch.Size([256*256]), \
             "`perm_256` must be a permutation tensor of size 256*256"
 
-        # Get random permutation and inverse permutation for stage 1
+        # Save permutation and inverse permutation for stage 1
         self.perm_64 = perm_64
         self.perm_64_inv = get_inv_perm(self.perm_64)
 
-        # Get random permutation and inverse permutation for stage 2
+        # Save permutation and inverse permutation for stage 2
         self.perm_256 = perm_256
         self.perm_256_inv = get_inv_perm(self.perm_256)
 
+        # Save permutation and inverse permutation for stage 3
+        if perm_1024 is None:
+            self.perm_1024 = torch.arange(1024*1024)
+            self.perm_1024_inv = torch.arange(1024*1024)
+        else:
+            self.perm_1024 = perm_1024
+            self.perm_1024_inv = get_inv_perm(self.perm_1024)
+
     def view(self, im):
         im_size = im.shape[-1]
-        perm = self.perm_64 if im_size == 64 else self.perm_256
-        num_patches = im_size
+        if im_size == 64:
+            perm = self.perm_64
+        elif im_size == 256:
+            perm = self.perm_256
+        elif im_size == 1024:
+            perm = self.perm_1024
+        else:
+            raise Exception("Invalid image size. Must be size 64, 256, or 1024.")
 
-        # Permute every pixel in the image
+        # Permute every pixel in the image (so num_patches == num_pixels)
+        num_patches = im_size
         patch_size = 1
 
         # Reshape into patches of size (c, patch_size, patch_size)

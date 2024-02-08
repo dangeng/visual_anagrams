@@ -77,15 +77,22 @@ class PatchPermuteView(BaseView):
                              p2=patch_size)
         return im_rearr
 
-    def make_frame(self, im, t, canvas_size=384, scale=4, knot_seed=0):
-        '''
-        Scale is a hack, because PIL for some reason doesn't support pasting
-            at floating point coordinates. So just render at larger scale
-            and resize by 1/scale
-        '''
+    def make_frame(self, im, t, knot_seed=0):
         # Get useful info
         im_size = im.size[0]
+        canvas_size = int(1.5 * im_size)
         offset = (canvas_size - im_size) // 2  # offset to center animation
+
+        # Scale is a hack, because PIL for some reason doesn't support pasting
+        #   at floating point coordinates. So just render at larger scale
+        #   and then resize by 1/scale, to get more precise control
+        if im_size == 1024:
+            # Don't use scale if image is larger
+            # as it is unnecessary and quite slow
+            scale = 1
+        else:
+            scale = 4
+        
 
         canvas_size = canvas_size * scale
         offset = offset * scale

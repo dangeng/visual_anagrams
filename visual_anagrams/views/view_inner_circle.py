@@ -22,21 +22,23 @@ class InnerCircleView(PermuteView):
         '''
         self.perm_64 = make_inner_circle_perm(im_size=64, r=24)
         self.perm_256 = make_inner_circle_perm(im_size=256, r=96)
+        self.perm_1024 = make_inner_circle_perm(im_size=1024, r=384)
 
-        super().__init__(self.perm_64, self.perm_256)
+        super().__init__(self.perm_64, self.perm_256, self.perm_1024)
 
     def make_frame(self, im, t):
         im_size = im.size[0]
         frame_size = int(im_size * 1.5)
         theta = -t * 180
+        r = int(im_size / 8 * 3)    # TODO: Hardcoded
 
         # Convert to tensor
         im = torch.tensor(np.array(im) / 255.).permute(2,0,1)
 
-        # Get mask of circle (TODO: assuming size 256)
-        coords = torch.arange(0, 256) - 127.5
+        # Get mask of circle
+        coords = torch.arange(0, im_size) - im_size / 2.
         xx, yy = torch.meshgrid(coords, coords)
-        mask = xx**2 + yy**2 < (24*4)**2
+        mask = xx**2 + yy**2 < r**2
         mask = torch.stack([mask]*3).float()
 
         # Get rotate image

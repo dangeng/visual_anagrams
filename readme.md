@@ -40,41 +40,46 @@ Before using DeepFloyd IF, you must accept its usage conditions. To do so:
 python huggingface_login.py
 ```
 
-and entering your [Hugging Face Hub access token](https://huggingface.co/docs/hub/security-tokens#what-are-user-access-tokens) when prompted. If asked `Add token as git credential? (Y/n)`, you can respond with `n`.
+and entering your [Hugging Face Hub access token](https://huggingface.co/docs/hub/security-tokens#what-are-user-access-tokens) when prompted. It does not matter how you answer the `Add token as git credential? (Y/n)` question.
 
 
 
 ## Usage
 
 
-To generate 90 degree rotation illusions, run:
+To generate 90 degree rotation illusions we can use the below command. This will create 10 samples, at 3 different sizes: 64×64, 256×256, and 1024×1024. See below for commands to generate more types of multi-view illusions.
 
 ```
-python generate.py --name rotate_cw.village.horse --prompts "a snowy mountain village" "a horse" --style "an oil painting of" --views identity rotate_cw --num_samples 10 --num_inference_steps 30 --guidance_scale 10.0
+python generate.py --name rotate_cw.village.horse --prompts "a snowy mountain village" "a horse" --style "an oil painting of" --views identity rotate_cw --num_samples 10 --num_inference_steps 30 --guidance_scale 10.0 --generate_1024
 ```
 
 Here is a description of useful arguments:
 
-- `name`: Name for the illusion. Will save samples to `./results/{name}`.
-- `prompts`: A list of prompts for illusions
-- `style`: Optional style prompt to prepend to each of the prompts. For example, could be `"an oil painting of"`. Saves some writing.
-- `views`: A list of views to use. Must match the number of prompts. For a list of views see the `get_views` function in `visual_anagrams/views/__init__.py`.
-- `num_samples`: Number of illusions to sample
-- `num_inference_steps`: Number of diffusion denoising steps to take.
-- `guidance_scale`: Guidance scale for classifier free guidance.
+- `--name`: Name for the illusion. Will save samples to `./results/{name}`.
+- `--prompts`: A list of prompts for illusions
+- `--style`: Optional style prompt to prepend to each of the prompts. For example, could be `"an oil painting of"`. Saves some writing.
+- `--views`: A list of views to use. Must match the number of prompts. For a list of views see the `get_views` function in `visual_anagrams/views/__init__.py`.
+- `--num_samples`: Number of illusions to sample
+- `--num_inference_steps`: Number of diffusion denoising steps to take.
+- `--guidance_scale`: Guidance scale for classifier free guidance.
+- `--generate_1024`: Use DeepFloyd Stage III (which is just Stable Diffusion 4x Upscaler) to upsample to 1024x1024 image.
+
+### Upscaling
+
+We use the first two stages of DeepFloyd IF to generate a 64×64 and 256×256 multi-view illusion. DeepFloyd further uses the [Stable Diffusion x4 Upscaler](https://huggingface.co/stabilityai/stable-diffusion-x4-upscaler) to go from 256×256 to 1024×1024. However, this model uses latents and we therefore did not or cannot implement multi-view denoising for this stage. So we can only naively upsample, using just the first prompt. Its important to not that this may affect the quality of transformed images, but in practice we find that it works quite well.
 
 ### Animating
 
-To animate the above two view illusion, run:
+To animate the above two view illusion, we can run the below command. This command should work for all three sizes at which we sample (64×64, 256×256, and 1024x1024), although honestly 64×64 is very small and looks quite bad.
 
 ```
-python animate.py --im_path results/rotate_cw.village.horse/0000/sample_256.png --metadata_path results/rotate_cw.village.horse/metadata.pkl
+python animate.py --im_path results/rotate_cw.village.horse/0000/sample_1024.png --metadata_path results/rotate_cw.village.horse/metadata.pkl
 ```
 
 Here is a description of useful arguments:
 
-- `im_path`: The path to your illusion
-- `metadata_path`: The path to metadata about your illusion, which is saved by `generate.py`. Overrides the options below.
+- `im_path`: The path to your illusion. This should work for any of the three image sizes (64, 256, or 1024).
+- `metadata_path`: The path to metadata about the views and prompts used to generate the illusion, which is saved by `generate.py`. Overrides the options below.
 - `view`: Name of the view. For a list of views see the `get_views` function in `visual_anagrams/views/__init__.py`
 - `prompt_1`: Prompt for the original image. You can add `\n` characters here for line breaks.
 - `prompt_2`: Same as `prompt_1`, but for the transformed image.
@@ -96,49 +101,55 @@ Choosing prompts for illusions can be fairly tricky and unintuitive. Here are so
 Flipping illusion:
 
 ```
-python generate.py --name flip.campfire.man --prompts "an oil painting of people around a campfire" "an oil painting of an old man" --views identity flip --num_samples 10 --num_inference_steps 30 --guidance_scale 10.0
+python generate.py --name flip.campfire.man --prompts "an oil painting of people around a campfire" "an oil painting of an old man" --views identity flip --num_samples 10 --num_inference_steps 30 --guidance_scale 10.0 --generate_1024
 ```
 
 Jigsaw illusions:
 
 ```
-python generate.py --name jigsaw.houseplants.marilyn --prompts "houseplants" "marilyn monroe" --style "an oil painting of" --views identity jigsaw --num_samples 10 --num_inference_steps 30 --guidance_scale 10.0
+python generate.py --name jigsaw.houseplants.marilyn --prompts "houseplants" "marilyn monroe" --style "an oil painting of" --views identity jigsaw --num_samples 10 --num_inference_steps 30 --guidance_scale 10.0 --generate_1024
 ```
 
 Inner circle illusions:
 
 ```
-python generate.py --name inner.einstein.marilyn --prompts "albert einstein" "marilyn monroe" --style "an oil painting of" --views identity inner_circle --num_samples 10 --num_inference_steps 30 --guidance_scale 10.0
+python generate.py --name inner.einstein.marilyn --prompts "albert einstein" "marilyn monroe" --style "an oil painting of" --views identity inner_circle --num_samples 10 --num_inference_steps 30 --guidance_scale 10.0 --generate_1024
 ```
 
 Color inversion illusions:
 
 ```
-python generate.py --name negate.landscape.houseplants --prompts "a landscape" "houseplants" --style "a lithograph of" --views identity negate --num_samples 10 --num_inference_steps 30 --guidance_scale 10.0
+python generate.py --name negate.landscape.houseplants --prompts "a landscape" "houseplants" --style "a lithograph of" --views identity negate --num_samples 10 --num_inference_steps 30 --guidance_scale 10.0 --generate_1024
 ```
 
 Patch permutation illusions:
 
 ```
-python generate.py --name patch.lemur.kangaroo --prompts "a lemur" "a kangaroo" --style "a pencil sketch of" --views identity patch_permute --num_samples 10 --num_inference_steps 30 --guidance_scale 10.0
+python generate.py --name patch.lemur.kangaroo --prompts "a lemur" "a kangaroo" --style "a pencil sketch of" --views identity patch_permute --num_samples 10 --num_inference_steps 30 --guidance_scale 10.0 --generate_1024
 ```
 
 Pixel permutation illusions:
 
 ```
-python generate.py --name pixel.duck.rabbit --prompts "a duck" "a rabbit" --style "a mosaic of" --views identity pixel_permute --num_samples 10 --num_inference_steps 30 --guidance_scale 10.0
+python generate.py --name pixel.duck.rabbit --prompts "a duck" "a rabbit" --style "a mosaic of" --views identity pixel_permute --num_samples 10 --num_inference_steps 30 --guidance_scale 10.0 --generate_1024
 ```
 
 Skew illusions:
 
 ```
-python generate.py --name skew.tudor.skull --prompts "a tudor portrait" "a skull" --style "an oil painting of" --views identity skew --num_samples 10 --num_inference_steps 30 --guidance_scale 10.0
+python generate.py --name skew.tudor.skull --prompts "a tudor portrait" "a skull" --style "an oil painting of" --views identity skew --num_samples 10 --num_inference_steps 30 --guidance_scale 10.0 --generate_1024
 ```
 
 Three view illusions:
 
 ```
-python generate.py --name threeview.waterfall.teddy.rabbit --prompts "a waterfall" "a teddy bear" "a rabbit" --style "an oil painting of" --views identity rotate_cw rotate_ccw --num_samples 10 --num_inference_steps 30 --guidance_scale 10.0
+python generate.py --name threeview.waterfall.teddy.rabbit --prompts "a waterfall" "a teddy bear" "a rabbit" --style "an oil painting of" --views identity rotate_cw rotate_ccw --num_samples 10 --num_inference_steps 30 --guidance_scale 10.0 --generate_1024
+```
+
+"Square Hinge" illusions:
+
+```
+python generate.py --name hinge.duck.rabbit --prompts "a duck" "a rabbit" --style "a water color of" --views identity square_hinge --num_samples 10 --num_inference_steps 30 --guidance_scale 10.0 --generate_1024
 ```
 
 ## Custom Views

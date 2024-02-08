@@ -46,6 +46,10 @@ if __name__ == '__main__':
         prompt_1 = f'{m_args.style} {m_args.prompts[0]}'.strip()
         prompt_2 = f'{m_args.style} {m_args.prompts[1]}'.strip()
 
+    # Get sizes
+    im_size = im.size[0]
+    frame_size = int(im_size * 1.5)
+
     # Animate
     animate_two_view(
             im,
@@ -56,6 +60,6 @@ if __name__ == '__main__':
             hold_duration=120,
             text_fade_duration=10,
             transition_duration=45,
-            im_size=256,
-            frame_size=384,
+            im_size=im_size,
+            frame_size=frame_size,
         )

@@ -24,8 +24,9 @@ class SquareHingeView(PermuteView):
         '''
         self.perm_64 = make_square_hinge(im_size=64)
         self.perm_256 = make_square_hinge(im_size=256)
+        self.perm_1024 = make_square_hinge(im_size=1024)
 
-        super().__init__(self.perm_64, self.perm_256)
+        super().__init__(self.perm_64, self.perm_256, self.perm_1024)
 
     def paste_pil(self, image, x, y, theta, xc, yc, canvas_size=384):
         '''
@@ -99,7 +100,8 @@ class SquareHingeView(PermuteView):
                                            np.round(frame_size//2 + offset_y).astype(int), 
                                            0, 
                                            (square_size+1)//2, 
-                                           (square_size+1)//2)
+                                           (square_size+1)//2,
+                                           canvas_size=frame_size)
 
                 canvas.paste(subsquare, (0,0), subsquare)
 

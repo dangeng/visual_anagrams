@@ -22,7 +22,8 @@ def add_args(parser):
     parser.add_argument("--guidance_scale", type=float, default=7.0)
     parser.add_argument("--noise_level", type=int, default=50, help='Noise level for stage 2')
     parser.add_argument("--device", type=str, default='cuda')
-    parser.add_argument("--save_metadata", action='store_true', help='If true, save metadata about the views. May use lots of disk space, particular for permutation views.')
+    parser.add_argument("--save_metadata", action='store_true', help='If true, save metadata about the views. May use lots of disk space, particularly for permutation views.')
+    parser.add_argument("--generate_1024", action='store_true', help='If true, also upsample using SD 4x upsampler. Please see readme for more details.')
 
     return parser
 

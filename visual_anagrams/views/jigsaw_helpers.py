@@ -7,7 +7,7 @@ def get_jigsaw_pieces(size):
     Load all pieces of the 4x4 jigsaw puzzle.
 
     size (int) :
-        Should be 64 or 256, indicating side length of jigsaw puzzle
+        Should be 64, 256, or 1024 indicating side length of jigsaw puzzle
     '''
 
     # Location of pieces

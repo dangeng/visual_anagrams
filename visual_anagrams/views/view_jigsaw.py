@@ -12,17 +12,16 @@ class JigsawView(PermuteView):
     Implements a 4x4 jigsaw puzzle view...
     '''
     def __init__(self, seed=11):
-        '''
-        '''
         # Get pixel permutations, corresponding to jigsaw permutations
         self.perm_64, _ = make_jigsaw_perm(64, seed=seed)
         self.perm_256, (jigsaw_perm) = make_jigsaw_perm(256, seed=seed)
+        self.perm_1024, _ = make_jigsaw_perm(1024, seed=seed)
 
-        # keep track of jigsaw permutation as well
+        # keep track of jigsaw permutation used
         self.piece_perms, self.edge_swaps = jigsaw_perm
 
         # Init parent PermuteView, with above pixel perms
-        super().__init__(self.perm_64, self.perm_256)
+        super().__init__(self.perm_64, self.perm_256, self.perm_1024)
 
     def extract_pieces(self, im):
         '''
@@ -80,7 +79,7 @@ class JigsawView(PermuteView):
         return canvas
 
 
-    def make_frame(self, im, t, canvas_size=384, knot_seed=0):
+    def make_frame(self, im, t, knot_seed=0):
         '''
         This function returns a PIL image of a frame animating a jigsaw
             permutation. Pieces move and rotate from the identity view 
@@ -104,13 +103,11 @@ class JigsawView(PermuteView):
             Interpolation parameter in [0,1] indicating what frame of the
             animation to generate
 
-        canvas_size (int) :
-            Side length of the frame
-
         knot_seed (int) :
             Seed for random offsets for the knots
         '''
         im_size = im.size[0]
+        canvas_size = int(1.5 * im_size)
 
         # Extract 16 jigsaw pieces
         pieces = self.extract_pieces(im)
@@ -167,8 +164,8 @@ class JigsawView(PermuteView):
         end_locs = start_locs[perm_inv]
 
         # Convert start and end locations to pixel coordinate system
-        start_locs[:,:2] = (start_locs[:,:2] + 2) * 64
-        end_locs[:,:2] = (end_locs[:,:2] + 2) * 64
+        start_locs[:,:2] = (start_locs[:,:2] + 2) * (im_size / 4)
+        end_locs[:,:2] = (end_locs[:,:2] + 2) * (im_size / 4)
 
         # Add offset so pieces are centered on canvas
         start_locs[:,:2] = start_locs[:,:2] + (canvas_size - im_size) // 2
@@ -215,7 +212,7 @@ class JigsawView(PermuteView):
 
             # Get piece in location and rotation
             xc = yc = im_size // 4 // 2
-            pasted_piece = self.paste_piece(pieces[i], x, y, theta, xc, yc)
+            pasted_piece = self.paste_piece(pieces[i], x, y, theta, xc, yc, canvas_size=canvas_size)
 
             canvas.paste(pasted_piece, (0,0), pasted_piece)
 
