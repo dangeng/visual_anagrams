@@ -14,7 +14,7 @@ This repo contains code to generate visual anagrams and other multi-view optical
 
 ## Colab Demos
 
-We provide two colab demos. One was graciously written by [Tamizh N](https://github.com/tmzh), and memory efficient enough to be run with Colab Free Tier resources (at the cost of slightly more inconvenience):
+We provide two colab demos. One was graciously written by [Tamizh N](https://github.com/tmzh), and is memory efficient enough to be run with Colab Free Tier resources (at the cost of just slightly more inconvenience):
 
 [![Open In Colab (Free Tier)](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/dangeng/visual_anagrams/blob/main/notebooks/colab_demo_free_tier.ipynb) <sub>(Free Tier)</sub>
 
