@@ -53,6 +53,7 @@ def animate_two_view(
         transition_duration=60,
         im_size=256,
         frame_size=384,
+        boomerang=True,
 ):
     '''
     Animate the transition between an image and the view of an image
@@ -86,6 +87,11 @@ def animate_two_view(
 
     frame_size (int):
         Size of the final video
+
+    boomerang (bool):
+        If true, boomerang the clip by showing image, then transformed
+        image, and finally the original image.
+        If false, only show image then transformed image.
     '''
 
     # Make list of frames
@@ -138,7 +144,8 @@ def animate_two_view(
     frames += [frame_2_text] * (hold_duration // 2)
 
     # "Boomerang" the clip, so we get back to view 1
-    frames = frames + frames[::-1]
+    if boomerang:
+        frames = frames + frames[::-1]
 
     # Move last bit of clip to front
     frames = frames[-hold_duration//2:] + frames[:-hold_duration//2]
