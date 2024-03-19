@@ -1,5 +1,7 @@
 # Visual Anagrams: Generating Multi-View Optical Illusions with Diffusion Models
 
+CVPR 2024
+
 [Daniel Geng](https://dangeng.github.io/), [Aaron Park](https://inbumpark.github.io/), [Andrew Owens](https://andrewowens.com/)
 
 ## [[Arxiv](https://arxiv.org/abs/2311.17919)] [[Website](https://dangeng.github.io/visual_anagrams/)] [[Colab (Free Tier)](https://colab.research.google.com/github/dangeng/visual_anagrams/blob/main/notebooks/colab_demo_free_tier.ipynb)] [[Colab (Pro Tier)](https://colab.research.google.com/github/dangeng/visual_anagrams/blob/main/notebooks/colab_demo_pro_tier.ipynb)]
@@ -163,6 +165,16 @@ python generate.py --name threeview.waterfall.teddy.rabbit --prompts "a waterfal
 ```
 python generate.py --name hinge.duck.rabbit --prompts "a duck" "a rabbit" --style "a water color of" --views identity square_hinge --num_samples 10 --num_inference_steps 30 --guidance_scale 10.0 --generate_1024
 ```
+
+## Failure Views
+
+We also implement views which fail, as discussed in our paper. These include:
+
+- `InnerCircleViewFailure`: Inner circle rotation with bilinear or nearest interpolation.
+- `BlurViewFailure`: Blurring, in an attempt to make hybrid images.
+- `WhiteBalanceViewFailure`: Very simple white balancing, in an attempt to recreate the "dress" illusion
+
+All of the above views fail because they change the statistics of the Gaussian noise. See paper for more details.
 
 ## Custom Views
 
