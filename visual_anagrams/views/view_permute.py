@@ -16,6 +16,9 @@ class PermuteView(BaseView):
 
         perm_256 (torch.tensor) :
             Tensor of integer indexes, defining a permutation, of size 256*256
+
+        perm_1024 (torch.tensor) :
+            Tensor of integer indexes, defining a permutation, of size 1024*1024
         '''
 
         assert perm_64.shape == torch.Size([64*64]), \

@@ -11,10 +11,10 @@ class JigsawView(PermuteView):
     '''
     Implements a 4x4 jigsaw puzzle view...
     '''
-    def __init__(self, seed=11):
+    def __init__(self, seed=4522):
         # Get pixel permutations, corresponding to jigsaw permutations
-        self.perm_64, _ = make_jigsaw_perm(64, seed=seed)
-        self.perm_256, (jigsaw_perm) = make_jigsaw_perm(256, seed=seed)
+        self.perm_64, (jigsaw_perm) = make_jigsaw_perm(64, seed=seed)
+        self.perm_256, _ = make_jigsaw_perm(256, seed=seed)
         self.perm_1024, _ = make_jigsaw_perm(1024, seed=seed)
 
         # keep track of jigsaw permutation used

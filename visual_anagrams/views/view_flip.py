@@ -17,7 +17,7 @@ class FlipView(BaseView):
     def make_frame(self, im, t):
         im_size = im.size[0]
         frame_size = int(im_size * 1.5)
-        theta = t * 180
+        theta = -t * 180
 
         # TODO: Technically not a flip, change this to a homography later
         frame = Image.new('RGB', (frame_size, frame_size), (255, 255, 255))
