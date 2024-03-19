@@ -17,7 +17,8 @@ def sample_stage_1(model,
 
     # Params
     num_images_per_prompt = 1
-    device = model.device
+    #device = model.device
+    device = torch.device('cuda')   # Sometimes model device is cpu???
     height = model.unet.config.sample_size
     width = model.unet.config.sample_size
     batch_size = 1      # TODO: Support larger batch sizes, maybe
