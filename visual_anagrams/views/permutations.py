@@ -267,5 +267,7 @@ def recover_patch_permute(im_0, im_1, patch_size):
 
     # Find closest patch in other image by L1 dist, and return indexes
     perm = (patches_1_repeated - patches_0[:,None]).abs().sum((2,3,4)).argmin(1)
+    dist = (patches_1_repeated - patches_0[:,None]).abs().sum((2,3,4))[torch.arange(len(perm)), perm].sum()
+    print(f'Total L1 distance: {dist.item()}')
 
     return perm
