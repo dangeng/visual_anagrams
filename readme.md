@@ -1,3 +1,7 @@
+# Visual Anagrams | Factorized Diffusion
+
+<font color="red"><b>NOTE:</b></font> This repo contains code for both [Visual Anagrams](https://dangeng.github.io/visual_anagrams/) and [Factorized Diffusion](https://dangeng.github.io/factorized_diffusion/). The below is the readme for Visual Anagrams. Please see [this readme](https://github.com/dangeng/visual_anagrams/blob/main/readme_factorized_diffusion.md) for info about factorized diffusion.
+
 # Visual Anagrams: Generating Multi-View Optical Illusions with Diffusion Models
 
 CVPR 2024
