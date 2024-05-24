@@ -37,6 +37,14 @@
   <script src="./static/js/index.js"></script>
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+  <!-- Enable smooth scrolling for only main page -->
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+  </style>
+
 </head>
 <body>
 
@@ -166,8 +174,10 @@
           transformed. We <a href="#method">show in theory</a> and practice that our method supports a broad range of transformations 
           including <a href="#rot90_examples">rotations</a>, <a href="#flip_examples">flips</a>, 
           <a href="#inversion_examples">color inversions</a>, <a href="#misc_examples">skews</a>, 
-          <a href="#jigsaw_examples">jigsaw rearrangements</a>, and 
-          <a href="#perm_examples">random permutations</a>. We show some examples below.
+          <a href="#jigsaw_examples">jigsaw rearrangements</a>, 
+          <a href="#perm_examples">random permutations</a>, and
+          <a href="#triple_examples">multiple views</a>.
+          We show some examples below.
           </p>
         </div>
       </div>
@@ -184,13 +194,19 @@
     </div>
     <div class="columns is-centered">
       <video class="grid-video" autoplay muted loop playsinline>
-        <source src="./static/videos/grids_half/jigsaw.grid.left.mp4"
+        <source src="./static/videos/viz/jigsaw.1.mp4"
                 type="video/mp4">
       </video>
     </div>
     <div class="columns is-centered">
       <video class="grid-video" autoplay muted loop playsinline>
-        <source src="./static/videos/grids_half/jigsaw.grid.right.mp4"
+        <source src="./static/videos/viz/jigsaw.2.mp4"
+                type="video/mp4">
+      </video>
+    </div>
+    <div class="columns is-centered">
+      <video class="grid-video" autoplay muted loop playsinline>
+        <source src="./static/videos/viz/jigsaw.3.mp4"
                 type="video/mp4">
       </video>
     </div>
@@ -205,25 +221,25 @@
     </div>
     <div class="columns is-centered">
       <video class="grid-video" autoplay muted loop playsinline>
-        <source src="./static/videos/grids_half/flips.grid.0.left.mp4"
+        <source src="./static/videos/viz/flips.1.mp4"
                 type="video/mp4">
       </video>
     </div>
     <div class="columns is-centered">
       <video class="grid-video" autoplay muted loop playsinline>
-        <source src="./static/videos/grids_half/flips.grid.0.right.mp4"
+        <source src="./static/videos/viz/flips.2.mp4"
                 type="video/mp4">
       </video>
     </div>
     <div class="columns is-centered">
       <video class="grid-video" autoplay muted loop playsinline>
-        <source src="./static/videos/grids_half/flips.grid.1.left.mp4"
+        <source src="./static/videos/viz/flips.3.mp4"
                 type="video/mp4">
       </video>
     </div>
     <div class="columns is-centered">
       <video class="grid-video" autoplay muted loop playsinline>
-        <source src="./static/videos/grids_half/flips.grid.1.right.mp4"
+        <source src="./static/videos/viz/flips.4.mp4"
                 type="video/mp4">
       </video>
     </div>
@@ -238,13 +254,13 @@
     </div>
     <div class="columns is-centered">
       <video class="grid-video" autoplay muted loop playsinline>
-        <source src="./static/videos/grids_half/rotate90.grid.left.mp4"
+        <source src="./static/videos/viz/rotate.1.mp4"
                 type="video/mp4">
       </video>
     </div>
     <div class="columns is-centered">
       <video class="grid-video" autoplay muted loop playsinline>
-        <source src="./static/videos/grids_half/rotate90.grid.right.mp4"
+        <source src="./static/videos/viz/rotate.2.mp4"
                 type="video/mp4">
       </video>
     </div>
@@ -259,13 +275,13 @@
     </div>
     <div class="columns is-centered">
       <video class="grid-video" autoplay muted loop playsinline>
-        <source src="./static/videos/grids_half/invert.grid.left.mp4"
+        <source src="./static/videos/viz/invert.1.mp4"
                 type="video/mp4">
       </video>
     </div>
     <div class="columns is-centered">
       <video class="grid-video" autoplay muted loop playsinline>
-        <source src="./static/videos/grids_half/invert.grid.right.mp4"
+        <source src="./static/videos/viz/invert.2.mp4"
                 type="video/mp4">
       </video>
     </div>
@@ -276,17 +292,17 @@
 <section class="section">
   <div class="container">
     <div class="columns is-centered has-text-centered">
-      <h2 class="title is-3" id="misc_examples">Miscellaneous Permutations</h2>
+      <h2 class="title is-3" id="misc_examples">Miscellaneous Transformations</h2>
     </div>
     <div class="columns is-centered">
       <video class="grid-video" autoplay muted loop playsinline>
-        <source src="./static/videos/grids_half/misc.grid.left.mp4"
+        <source src="./static/videos/viz/misc.1.mp4"
                 type="video/mp4">
       </video>
     </div>
     <div class="columns is-centered">
       <video class="grid-video" autoplay muted loop playsinline>
-        <source src="./static/videos/grids_half/misc.grid.right.mp4"
+        <source src="./static/videos/viz/misc.2.mp4"
                 type="video/mp4">
       </video>
     </div>
@@ -301,13 +317,13 @@
     </div>
     <div class="columns is-centered">
       <video class="grid-video" autoplay muted loop playsinline>
-        <source src="./static/videos/grids_half/patch.grid.left.mp4"
+        <source src="./static/videos/viz/patch.1.mp4"
                 type="video/mp4">
       </video>
     </div>  
     <div class="columns is-centered">
       <video class="grid-video" autoplay muted loop playsinline>
-        <source src="./static/videos/grids_half/patch.grid.right.mp4"
+        <source src="./static/videos/viz/patch.2.mp4"
                 type="video/mp4">
       </video>
     </div>  
@@ -318,11 +334,26 @@
 <section class="section">
   <div class="container">
     <div class="columns is-centered has-text-centered">
-      <h2 class="title is-3" id="perm_examples">Three Views</h2>
+      <h2 class="title is-3" id="triple_examples">Three Views</h2>
     </div>
     <div class="columns is-centered">
       <video class="grid-video" autoplay muted loop playsinline>
-        <source src="./static/videos/grids_half/threeview.grid.mp4"
+        <source src="./static/videos/viz/3view.mp4"
+                type="video/mp4">
+      </video>
+    </div>  
+  </div>
+</section>
+
+<!-- FOUR VIEW GRID -->
+<section class="section">
+  <div class="container">
+    <div class="columns is-centered has-text-centered">
+      <h2 class="title is-3" id="quadruple_examples">Four Views</h2>
+    </div>
+    <div class="columns is-centered">
+      <video class="grid-video" autoplay muted loop playsinline>
+        <source src="./static/videos/viz/4view.mp4"
                 type="video/mp4">
       </video>
     </div>  
@@ -432,25 +463,6 @@
 
 <section class="section">
   <div class="container is-max-desktop">
-    <!-- Paper video. -->
-    <div class="columns is-centered has-text-centered">
-      <div class="column is-four-fifths">
-        <h2 class="title is-3">Video (Coming Soon!)</h2>
-        <div class="publication-video">
-          <!--<iframe src="https://www.youtube.com/embed/jNQXAC9IVRw?si=8Dnrd2U1f2My6KUC"
-                  frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>-->
-          <iframe src="https://www.youtube.com/embed/1234567890"
-                  frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-        </div>
-      </div>
-    </div>
-    <!--/ Paper video. -->
-  </div>
-</section>
-
-
-<section class="section">
-  <div class="container is-max-desktop">
     <!-- Concurrent Work. -->
     <div class="columns is-centered">
       <div class="column is-full-width">
@@ -458,7 +470,7 @@
 
         <div class="content has-text-justified">
           <p>
-            This project is inspired by previous work in this area, including:
+            There are several other great works in this area:
           </p>
           <p>
             <a href="https://diffusionillusions.com/" target="_blank">Diffusion Illusions</a>, 
@@ -474,6 +486,17 @@
           <p>
             <a href="https://www.reddit.com/r/StableDiffusion/comments/16ew9fz/spiral_town_different_approach_to_qr_monster/" target="_blank">Recent work by a pseudonymous artist</a>, Ugleh,
             uses a Stable Diffusion model finetuned for generating QR codes to produce images whose global structure subtly matches a given template image.
+          </p>
+          <p>
+            <a href="https://dangeng.github.io/factorized_diffusion/" target="_blank">Factorized Diffusion</a>, 
+            follow up work to Visual Anagrams which makes many different types of "hybrid" illusions, including 
+            hybrid images with three different contents, partially resolving an open problem from the 
+            <a href="https://stanford.edu/class/ee367/reading/OlivaTorralb_Hybrid_Siggraph06.pdf" target="_blank">
+            original hybrid images paper</a> (see section 2.3).
+          </p>
+          <p>
+            <a href="https://ificl.github.io/images-that-sound/" target="_blank">Images that Sound</a>, 
+            which creates spectrograms that also look like images using a similar technique, but across modalities.
           </p>
         </div>
       </div>
