@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="Optical illusions by factorizing diffusion models.">
+  <meta name="keywords" content="Diffusion, Illusions, Optical Illusions">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Visual Anagrams</title>
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-8P4QSMJ1ZN"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-8P4QSMJ1ZN');
+  </script>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <!--<link rel="icon" href="./static/images/favicon.svg">-->
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+
+
+<section class="hero" style="margin-top: 4rem;">
+  <div class="hero-body" style="padding-bottom: 0px;">
+
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered is-three-fifths">
+          <h1 class="title is-2 publication-title" style="margin-bottom:0.5rem;">Visual Anagrams</h1>
+          <h3 class="title is-4 publication-title">Rotations Gallery</h3>
+
+          <div class="content has-text-justified">
+            <p>
+              This gallery contains illusions that change appearance after a
+              90 degree or 180 degree rotation, including ambigrams, which are words 
+              written such that they spell the same thing when flipped upside down.
+            </p>
+          </div>
+
+          <!-- LINK TO MAIN PAGE -->
+          <div class="column has-text-centered" style="padding-bottom: 0px;">
+            <div class="publication-links">
+              <span class="link-block">
+                <a href="./index.html"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-arrow-left"></i>
+                  </span>
+                  <span>Back to Main Page</span>
+                  </a>
+              </span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- PAGINATION BUTTONS -->
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <div class="publication-links">
+            <span class="link-block">
+              <a href=""
+                  class="external-link button is-normal is-rounded is-dark"
+                  id="top-prev">
+                <span class="icon">
+                    <i class="fas fa-arrow-left"></i>
+                </span>
+                <span>Prev Page</span>
+              </a>
+            </span>
+            <span class="link-block">
+              <a href="?page=1"
+                  class="external-link button is-normal is-rounded is-dark"
+                  id="top-next">
+                <span>Next Page</span>
+                <span class="icon">
+                    <i class="fas fa-arrow-right"></i>
+                </span>
+              </a>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- VIDEOS -->
+<section class="section" style="padding-top: 1em;">
+  <div class="container">
+
+    <div class="columns is-centered">
+      <video class="grid-video gallery-video" autoplay muted loop playsinline>
+        <source src="./static/videos/rotations/00.mp4"
+                type="video/mp4">
+      </video>
+    </div>
+    <div class="column has-text-centered" style="padding-top: 0px;">
+      <div class="publication-links">
+        <span class="link-block">
+          <a href="./static/images/rotations/00.png"
+              class="external-link button is-normal is-rounded is-dark download-link">
+            <span class="icon">
+                <i class="fas fa-download"></i>
+            </span>
+            <span>Download Image</span>
+          </a>
+        </span>
+      </div>
+    </div>
+
+    <div class="columns is-centered">
+      <video class="grid-video gallery-video" autoplay muted loop playsinline>
+        <source src="./static/videos/rotations/01.mp4"
+                type="video/mp4">
+      </video>
+    </div>
+    <div class="column has-text-centered" style="padding-top: 0px;">
+      <div class="publication-links">
+        <span class="link-block">
+          <a href="./static/images/rotations/01.png"
+              class="external-link button is-normal is-rounded is-dark download-link">
+            <span class="icon">
+                <i class="fas fa-download"></i>
+            </span>
+            <span>Download Image</span>
+          </a>
+        </span>
+      </div>
+    </div>
+
+    <div class="columns is-centered">
+      <video class="grid-video gallery-video" autoplay muted loop playsinline>
+        <source src="./static/videos/rotations/02.mp4"
+                type="video/mp4">
+      </video>
+    </div>
+    <div class="column has-text-centered" style="padding-top: 0px;">
+      <div class="publication-links">
+        <span class="link-block">
+          <a href="./static/images/rotations/02.png"
+              class="external-link button is-normal is-rounded is-dark download-link">
+            <span class="icon">
+                <i class="fas fa-download"></i>
+            </span>
+            <span>Download Image</span>
+          </a>
+        </span>
+      </div>
+    </div>
+
+    <div class="columns is-centered">
+      <video class="grid-video gallery-video" autoplay muted loop playsinline>
+        <source src="./static/videos/rotations/03.mp4"
+                type="video/mp4">
+      </video>
+    </div>
+    <div class="column has-text-centered" style="padding-top: 0px;">
+      <div class="publication-links">
+        <span class="link-block">
+          <a href="./static/images/rotations/03.png"
+              class="external-link button is-normal is-rounded is-dark download-link">
+            <span class="icon">
+                <i class="fas fa-download"></i>
+            </span>
+            <span>Download Image</span>
+          </a>
+        </span>
+      </div>
+    </div>
+
+    <div class="columns is-centered">
+      <video class="grid-video gallery-video" autoplay muted loop playsinline>
+        <source src="./static/videos/rotations/04.mp4"
+                type="video/mp4">
+      </video>
+    </div>
+    <div class="column has-text-centered" style="padding-top: 0px;">
+      <div class="publication-links">
+        <span class="link-block">
+          <a href="./static/images/rotations/04.png"
+              class="external-link button is-normal is-rounded is-dark download-link">
+            <span class="icon">
+                <i class="fas fa-download"></i>
+            </span>
+            <span>Download Image</span>
+          </a>
+        </span>
+      </div>
+    </div>
+
+
+    <!-- PAGINATION BUTTONS -->
+    <div class="container is-max-desktop" style="margin-top: 3rem; margin-bottom: 3rem;">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <span class="link-block">
+                <a href=""
+                   class="external-link button is-normal is-rounded is-dark"
+                   id="bottom-prev">
+                  <span class="icon">
+                      <i class="fas fa-arrow-left"></i>
+                  </span>
+                  <span>Prev Page</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href="?page=1"
+                   class="external-link button is-normal is-rounded is-dark"
+                   id="bottom-next">
+                  <span>Next Page</span>
+                  <span class="icon">
+                      <i class="fas fa-arrow-right"></i>
+                  </span>
+                </a>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<script>
+  const ims_per_page = 5;
+  const num_pages = 5;
+
+  const urlParams = new URLSearchParams(window.location.search);
+  var pageIdx = parseInt(urlParams.get('page') || 0);
+
+  // Clip page numbers
+  if (pageIdx < 0) {
+    pageIdx = 0;
+  } else if (pageIdx >= num_pages) {
+    pageIdx = num_pages - 1;
+  }
+
+  // Replace video sources
+  const videoElements = document.querySelectorAll('.grid-video');
+  videoElements.forEach((video, index) => {
+    const videoSource = video.querySelector('source');
+    const newIndex = pageIdx * ims_per_page + index;
+    const videoPath = `./static/videos/rotations/${newIndex.toString().padStart(2, '0')}.mp4`;
+    videoSource.setAttribute('src', videoPath);
+    video.load(); // Force video reload. Kind of sketchy and wasteful, but whatever
+  });
+
+  // Replace download links
+  const downloadElements = document.querySelectorAll('.download-link');
+  downloadElements.forEach((button, index) => {
+    const newIndex = pageIdx * ims_per_page + index;
+    button.href = `./static/images/rotations/${newIndex.toString().padStart(2, '0')}.png`;
+  });
+
+  // Update pagination buttons
+  if (pageIdx == 0) {
+    document.querySelectorAll('#top-prev')[0].style['display'] = 'None';
+    document.querySelectorAll('#bottom-prev')[0].style['display'] = 'None';
+  } else {
+    document.querySelectorAll('#top-prev')[0].href = '?page=' + (pageIdx-1);
+    document.querySelectorAll('#top-prev')[0].lastElementChild.innerHTML += ' (' + (pageIdx) + '/' + num_pages + ')';
+    document.querySelectorAll('#bottom-prev')[0].href = '?page=' + (pageIdx-1);
+    document.querySelectorAll('#bottom-prev')[0].lastElementChild.innerHTML += ' (' + (pageIdx) + '/' + num_pages + ')';
+  }
+  if (pageIdx == num_pages - 1) {
+    document.querySelectorAll('#top-next')[0].style['display'] = 'None';
+    document.querySelectorAll('#bottom-next')[0].style['display'] = 'None';
+  } else {
+    document.querySelectorAll('#top-next')[0].href = '?page=' + (pageIdx+1);
+    document.querySelectorAll('#top-next')[0].firstElementChild.innerHTML += ' (' + (pageIdx+2) + '/' + num_pages + ')';
+    document.querySelectorAll('#bottom-next')[0].href = '?page=' + (pageIdx+1);
+    document.querySelectorAll('#bottom-next')[0].firstElementChild.innerHTML += ' (' + (pageIdx+2) + '/' + num_pages + ')';
+  }
+</script>
+
+
+</body>
+</html>

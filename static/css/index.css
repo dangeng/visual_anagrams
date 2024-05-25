@@ -20,7 +20,7 @@ body {
 
 .teaser {
   font-family: 'Google Sans', sans-serif;
-  padding-bottom: 3rem;
+  padding-bottom: 0.5rem;
 }
 
 
@@ -209,4 +209,12 @@ body {
 span.rev {
   unicode-bidi: bidi-override;
   direction: rtl;
+}
+
+.gallery-video {
+  border: 2px solid; 
+  border-radius: 20px; 
+  padding: 20px;
+  margin-bottom: 0rem;
+  margin-top: 3rem;
 }
