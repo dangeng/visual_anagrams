@@ -54,7 +54,7 @@ prompt_embeds = torch.cat(prompt_embeds)
 negative_prompt_embeds = torch.cat(negative_prompt_embeds)  # These are just null embeds
 
 # Get views
-views = get_views(args.views)
+views = get_views(args.views, view_args=args.view_args)
 
 # Save metadata
 save_metadata(views, args, save_dir)

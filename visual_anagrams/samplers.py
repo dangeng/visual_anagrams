@@ -75,7 +75,7 @@ def sample_stage_1(model,
             inverted_preds.append(inverted_pred)
         noise_pred_uncond = torch.stack(inverted_preds)
 
-                                # Invert the conditional estimates
+        # Invert the conditional estimates
         inverted_preds = []
         for pred, view in zip(noise_pred_text, views):
             inverted_pred = view.inverse_view(pred)

@@ -18,6 +18,7 @@ from .view_hybrid import HybridLowPassView, HybridHighPassView, \
     TripleHybridMediumPassView
 from .view_color import ColorView, GrayscaleView
 from .view_motion import MotionBlurResView, MotionBlurView
+from .view_scale import ScaleView
 
 VIEW_MAP = {
     'identity': IdentityView,
@@ -44,23 +45,29 @@ VIEW_MAP = {
     'color': ColorView,
     'motion': MotionBlurView,
     'motion_res': MotionBlurResView,
+    'scale': ScaleView,
 }
 
-def get_views(view_names):
+def get_views(view_names, view_args=None):
     '''
     Bespoke function to get views (just to make command line usage easier)
     '''
 
     views = []
-    for view_name in view_names:
+    if view_args is None:
+        view_args = [None for _ in view_names]
+
+    for view_name, view_arg in zip(view_names, view_args):
         if view_name == 'patch_permute':
-            args = [8]
+            args = [8 if view_arg is None else int(view_arg)]
         elif view_name == 'pixel_permute':
-            args = [64]
+            args = [64 if view_arg is None else int(view_arg)]
         elif view_name == 'skew':
-            args = [1.5]
+            args = [1.5 if view_arg is None else float(view_arg)]
         elif view_name in ['low_pass', 'high_pass']:
-            args = [2.0]
+            args = [2.0 if view_arg is None else float(view_arg)]
+        elif view_name in ['scale']:
+            args = [0.5 if view_arg is None else float(view_arg)]
         else:
             args = []
 
