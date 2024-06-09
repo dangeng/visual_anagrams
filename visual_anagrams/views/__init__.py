@@ -16,6 +16,7 @@ from .view_white_balance import WhiteBalanceViewFailure
 from .view_hybrid import HybridLowPassView, HybridHighPassView, \
     TripleHybridHighPassView, TripleHybridLowPassView, \
     TripleHybridMediumPassView
+from .view_color import ColorView, GrayscaleView
 
 VIEW_MAP = {
     'identity': IdentityView,
@@ -38,6 +39,8 @@ VIEW_MAP = {
     'triple_low_pass': TripleHybridLowPassView,
     'triple_medium_pass': TripleHybridMediumPassView,
     'triple_high_pass': TripleHybridHighPassView,
+    'grayscale': GrayscaleView,
+    'color': ColorView,
 }
 
 def get_views(view_names):

@@ -47,11 +47,17 @@ def save_illusion(image, views, sample_dir):
     size = image.shape[-1]
 
     # Save illusion
-    save_image(image / 2. + 0.5, sample_dir / f'sample_{size}.png', padding=0)
+    save_name = sample_dir / f'sample_{size}.png'
+    save_image(image / 2. + 0.5, save_name, padding=0)
 
     # Save views of the illusion
-    im_views = torch.stack([view.view(image[0]) for view in views])
-    save_image(im_views / 2. + 0.5, sample_dir / f'sample_{size}.views.png', padding=0)
+    # TODO: This is kind of ugly... can we fix it?
+    im_views = torch.stack([view.save_view(image[0]) 
+                            if hasattr(view, 'save_view') 
+                            else view.view(image[0]) 
+                            for view in views])
+    save_name_views = sample_dir / f'sample_{size}.views.png'
+    save_image(im_views / 2. + 0.5, save_name_views, padding=0)
 
 def save_metadata(views, args, save_dir):
     '''
