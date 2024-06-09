@@ -1,7 +1,8 @@
 from PIL import Image
 
 from visual_anagrams.views import get_views
-from visual_anagrams.animate import animate_two_view
+from visual_anagrams.animate import animate_two_view, animate_two_view_motion_blur
+from visual_anagrams.views.view_motion import MotionBlurView
 
 
 if __name__ == '__main__':
@@ -50,16 +51,31 @@ if __name__ == '__main__':
     im_size = im.size[0]
     frame_size = int(im_size * 1.5)
 
-    # Animate
-    animate_two_view(
-            im,
-            view,
-            prompt_1,
-            prompt_2,
-            save_video_path=save_video_path,
-            hold_duration=120,
-            text_fade_duration=10,
-            transition_duration=45,
-            im_size=im_size,
-            frame_size=frame_size,
-        )
+    if any([isinstance(view, MotionBlurView) for view in metadata['views']]):
+        # Animate specifically motion blur views
+        animate_two_view_motion_blur(
+                im,
+                view,
+                prompt_1,
+                prompt_2,
+                save_video_path=save_video_path,
+                hold_duration=60,
+                text_fade_duration=10,
+                transition_duration=2000,
+                im_size=im_size,
+                frame_size=frame_size,
+            )
+    else:
+        # Animate all other views
+        animate_two_view(
+                im,
+                view,
+                prompt_1,
+                prompt_2,
+                save_video_path=save_video_path,
+                hold_duration=120,
+                text_fade_duration=10,
+                transition_duration=45,
+                im_size=im_size,
+                frame_size=frame_size,
+            )

@@ -17,6 +17,7 @@ from .view_hybrid import HybridLowPassView, HybridHighPassView, \
     TripleHybridHighPassView, TripleHybridLowPassView, \
     TripleHybridMediumPassView
 from .view_color import ColorView, GrayscaleView
+from .view_motion import MotionBlurResView, MotionBlurView
 
 VIEW_MAP = {
     'identity': IdentityView,
@@ -41,6 +42,8 @@ VIEW_MAP = {
     'triple_high_pass': TripleHybridHighPassView,
     'grayscale': GrayscaleView,
     'color': ColorView,
+    'motion': MotionBlurView,
+    'motion_res': MotionBlurResView,
 }
 
 def get_views(view_names):
