@@ -25,6 +25,7 @@ def add_args(parser):
     parser.add_argument("--save_metadata", action='store_true', help='If true, save metadata about the views. May use lots of disk space, particularly for permutation views.')
     parser.add_argument("--generate_1024", action='store_true', help='If true, also upsample using SD 4x upsampler. Please see readme for more details.')
     parser.add_argument("--view_args", default=None, type=str, nargs='+', help='Args to pass to views')
+    parser.add_argument("--ref_im_path", type=str, default=None, help='Image from which to extract a component, when solving inverse problems')
 
     return parser
 

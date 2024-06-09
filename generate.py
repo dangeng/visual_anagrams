@@ -1,8 +1,10 @@
 import argparse
 from pathlib import Path
+from PIL import Image
 
 import torch
 from diffusers import DiffusionPipeline
+import torchvision.transforms.functional as TF
 
 from visual_anagrams.views import get_views
 from visual_anagrams.samplers import sample_stage_1, sample_stage_2
@@ -18,6 +20,13 @@ args = parser.parse_args()
 # Do admin stuff
 save_dir = Path(args.save_dir) / args.name
 save_dir.mkdir(exist_ok=True, parents=True)
+
+# Load reference image (for inverse problems)
+if args.ref_im_path is not None:
+    ref_im = Image.open(args.ref_im_path)
+    ref_im = TF.to_tensor(ref_im) * 2 - 1
+else:
+    ref_im = None
 
 # Make DeepFloyd IF stage I
 stage_1 = DiffusionPipeline.from_pretrained(
@@ -71,6 +80,7 @@ for i in range(args.num_samples):
                            prompt_embeds,
                            negative_prompt_embeds,
                            views,
+                           ref_im=ref_im,
                            num_inference_steps=args.num_inference_steps,
                            guidance_scale=args.guidance_scale,
                            reduction=args.reduction,
@@ -83,6 +93,7 @@ for i in range(args.num_samples):
                            prompt_embeds,
                            negative_prompt_embeds, 
                            views,
+                           ref_im=ref_im,
                            num_inference_steps=args.num_inference_steps,
                            guidance_scale=args.guidance_scale,
                            reduction=args.reduction,

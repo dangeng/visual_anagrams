@@ -2,6 +2,7 @@ from tqdm import tqdm
 
 import torch
 import torch.nn.functional as F
+import torchvision.transforms.functional as TF
 
 from diffusers.utils.torch_utils import randn_tensor
 
@@ -10,6 +11,7 @@ def sample_stage_1(model,
                    prompt_embeds,
                    negative_prompt_embeds, 
                    views,
+                   ref_im=None,
                    num_inference_steps=100,
                    guidance_scale=7.0,
                    reduction='mean',
@@ -44,7 +46,28 @@ def sample_stage_1(model,
         generator,
     )
 
+    # Resize ref image to correct size
+    if ref_im is not None:
+        ref_im = TF.resize(ref_im, height)
+        ref_im = ref_im.to(noisy_images.device).to(noisy_images.dtype)
+
     for i, t in enumerate(tqdm(timesteps)):
+        # If solving an inverse problem, then project x_t so
+        # that first component matches reference image's first component
+        if ref_im is not None:
+            # Inject noise to reference image
+            alpha_cumprod = model.scheduler.alphas_cumprod[t]
+            ref_noisy = torch.sqrt(alpha_cumprod) * ref_im + \
+                        torch.sqrt(1 - alpha_cumprod) * torch.randn_like(ref_im)
+
+            # Replace 1st component of x_t with 1st component of noisy ref image
+            ref_noisy_component = views[0].inverse_view(ref_noisy)
+            noisy_images_component = views[1].inverse_view(noisy_images[0])
+            noisy_images = ref_noisy_component + noisy_images_component
+
+            # Add back batch dim
+            noisy_images = noisy_images[None]
+
         # Apply views to noisy_image
         viewed_noisy_images = []
         for view_fn in views:
@@ -124,6 +147,7 @@ def sample_stage_2(model,
                    prompt_embeds,
                    negative_prompt_embeds, 
                    views,
+                   ref_im=None,
                    num_inference_steps=100,
                    guidance_scale=7.0,
                    reduction='mean',
@@ -156,6 +180,11 @@ def sample_stage_2(model,
         generator,
     )
 
+    # Resize ref image to correct size
+    if ref_im is not None:
+        ref_im = TF.resize(ref_im, height)
+        ref_im = ref_im.to(noisy_images.device).to(noisy_images.dtype)
+
     # Prepare upscaled image and noise level
     image = model.preprocess_image(image, num_images_per_prompt, device)
     upscaled = F.interpolate(image, (height, width), mode="bilinear", align_corners=True)
@@ -169,6 +198,22 @@ def sample_stage_2(model,
 
     # Denoising Loop
     for i, t in enumerate(tqdm(timesteps)):
+        # If solving an inverse problem, then project x_t so
+        # that first component matches reference image's first component
+        if ref_im is not None:
+            # Inject noise to reference image
+            alpha_cumprod = model.scheduler.alphas_cumprod[t]
+            ref_noisy = torch.sqrt(alpha_cumprod) * ref_im + \
+                        torch.sqrt(1 - alpha_cumprod) * torch.randn_like(ref_im)
+
+            # Replace 1st component of x_t with 1st component of noisy ref image
+            ref_noisy_component = views[0].inverse_view(ref_noisy)
+            noisy_images_component = views[1].inverse_view(noisy_images[0])
+            noisy_images = ref_noisy_component + noisy_images_component
+
+            # Add back batch dim
+            noisy_images = noisy_images[None]
+
         # Cat noisy image with upscaled conditioning image
         model_input = torch.cat([noisy_images, upscaled], dim=1)
 
