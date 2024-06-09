@@ -93,6 +93,10 @@ def sample_stage_1(model,
         if reduction == 'mean':
             noise_pred = noise_pred.mean(1)
             predicted_variance = predicted_variance.mean(1)
+        elif reduction == 'sum':
+            # For factorized diffusion
+            noise_pred = noise_pred.sum(1)
+            predicted_variance = predicted_variance.mean(1)
         elif reduction == 'alternate':
             noise_pred = noise_pred[:,i%num_prompts]
             predicted_variance = predicted_variance[:,i%num_prompts]
@@ -217,6 +221,10 @@ def sample_stage_2(model,
         predicted_variance = predicted_variance.view(-1,num_prompts,3,256,256)
         if reduction == 'mean':
             noise_pred = noise_pred.mean(1)
+            predicted_variance = predicted_variance.mean(1)
+        elif reduction == 'sum':
+            # For factorized diffusion
+            noise_pred = noise_pred.sum(1)
             predicted_variance = predicted_variance.mean(1)
         elif reduction == 'alternate':
             noise_pred = noise_pred[:,i%num_prompts]

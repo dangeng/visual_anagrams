@@ -13,6 +13,9 @@ from .view_inner_circle import InnerCircleView, InnerCircleViewFailure
 from .view_square_hinge import SquareHingeView
 from .view_blur import BlurViewFailure
 from .view_white_balance import WhiteBalanceViewFailure
+from .view_hybrid import HybridLowPassView, HybridHighPassView, \
+    TripleHybridHighPassView, TripleHybridLowPassView, \
+    TripleHybridMediumPassView
 
 VIEW_MAP = {
     'identity': IdentityView,
@@ -30,12 +33,18 @@ VIEW_MAP = {
     'inner_circle_failure': InnerCircleViewFailure,
     'blur_failure': BlurViewFailure,
     'white_balance_failure': WhiteBalanceViewFailure,
+    'low_pass': HybridLowPassView,
+    'high_pass': HybridHighPassView,
+    'triple_low_pass': TripleHybridLowPassView,
+    'triple_medium_pass': TripleHybridMediumPassView,
+    'triple_high_pass': TripleHybridHighPassView,
 }
 
 def get_views(view_names):
     '''
     Bespoke function to get views (just to make command line usage easier)
     '''
+
     views = []
     for view_name in view_names:
         if view_name == 'patch_permute':
@@ -44,6 +53,8 @@ def get_views(view_names):
             args = [64]
         elif view_name == 'skew':
             args = [1.5]
+        elif view_name in ['low_pass', 'high_pass']:
+            args = [2.0]
         else:
             args = []
 

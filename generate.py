@@ -63,7 +63,7 @@ save_metadata(views, args, save_dir)
 for i in range(args.num_samples):
     # Admin stuff
     generator = torch.manual_seed(args.seed + i)
-    sample_dir = save_dir / f'{i:04}'
+    sample_dir = save_dir / f'{args.seed + i:04}'
     sample_dir.mkdir(exist_ok=True, parents=True)
 
     # Sample 64x64 image
