@@ -2,7 +2,9 @@
 
 [Daniel Geng*](https://dangeng.github.io/), [Aaron Park*](https://inbumpark.github.io/), [Andrew Owens](https://andrewowens.com/)
 
-## [[Arxiv](https://arxiv.org/abs/2404.11615)] [[Website](https://dangeng.github.io/factorized_diffusion/)]
+## [[Arxiv](https://arxiv.org/abs/2404.11615)] [[Website](https://dangeng.github.io/factorized_diffusion/)] [[Colab (Free Tier)](https://colab.research.google.com/drive/1S9v0m9fgAw4MDdsLVHAdaRx94L4dwTPw?usp=sharing)]
+
+[![Open In Colab (Free Tier)](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1S9v0m9fgAw4MDdsLVHAdaRx94L4dwTPw?usp=sharing) <sub>(Free Tier)</sub>
 
 This readme includes instructions on how to use Factorized Diffusion, which allows conditioning different components of an image on different text prompts. For example, conditioning low frequencies of an image on one prompt but high frequencies on another results in [hybrid images](https://stanford.edu/class/ee367/reading/OlivaTorralb_Hybrid_Siggraph06.pdf) ([wikipedia](https://en.wikipedia.org/wiki/Hybrid_image)). We present a number of different decompositions that can be used with Factorized Diffusion below. Please read our paper or visit our website for more details.
 
