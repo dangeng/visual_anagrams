@@ -6,11 +6,11 @@
 
 This readme includes instructions on how to use Factorized Diffusion, which allows conditioning different components of an image on different text prompts. For example, conditioning low frequencies of an image on one prompt but high frequencies on another results in [hybrid images](https://stanford.edu/class/ee367/reading/OlivaTorralb_Hybrid_Siggraph06.pdf) ([wikipedia](https://en.wikipedia.org/wiki/Hybrid_image)). We present a number of different decompositions that can be used with Factorized Diffusion below. Please read our paper or visit our website for more details.
 
-### Installation
+## Installation
 
 Please see the main [`readme.md`](https://github.com/dangeng/visual_anagrams) for installation instructions.
 
-### Usage and Important Arguments
+## Usage and Important Arguments
 
 As a basic example, the following command can be run to create hybrid images, and saves them to `./results/hybrid/`:
 
@@ -31,7 +31,7 @@ Below we describe the more important arguments to the `generate.py` script:
 - `--reduction`: **It is important that this is set to `sum`,** as opposed to `mean` as in Visual Anagrams. This is because we define our decompositions to be a sum of components.
 - `--view_args`: Used to pass arguments to the views. For example, this can be used to specify the strength of the filters for the hybrid images, or what `scales` to use for the scaling decomposition (see below). Must match number of `--views` and `--prompts`.
 
-### Hybrid Images
+## Hybrid Images
 
 The following command generates hybrid images:
 
@@ -41,7 +41,7 @@ python generate.py --save_dir results --name hybrid --prompts "a painting of a p
 
 It uses the `"low_pass"` and `"high_pass"` views to condition low and high frequencies on different prompts. This results in an image that changes appearance depending on the distance it is viewed from (or if you squint). The default filters use Gaussian blurring with a `sigma` value of `2.0`. The strength of these filters can be adjusted by passing `sigma` values using the `--view_args` flag. For example, adding `--view_args 3.0 3.0` to the command uses a `sigma` value of 3.0. A lower `sigma` makes the low frequency prompt easier to see. A higher `sigma` makes the high frequency prompt easier to see.
 
-### Color Hybrids
+## Color Hybrids
 
 The following command generates color hybrids:
 
@@ -51,7 +51,7 @@ python generate.py --save_dir results --name color --prompts "landscape, oil pai
 
 It generates images that change appearance when colorized or turned grayscale. Because humans don't see color well under dim light, these images change appearance when taken from a dark room to a bright one. These images are made by conditioning the grayscale component on one prompt and the color component on another, by using the `"grayscale"` and `"color"` views. 
 
-### Motion Hybrids
+## Motion Hybrids
 
 The following command generates motion hybrids:
 
@@ -61,7 +61,7 @@ python generate.py --save_dir results --name motion --prompts "a photo of a pand
 
 Motion hybrids change appearance under motion blur. This is done by conditioning a motion blurred version of the image with one prompt, and the "residual" on a different prompt, and can be thought of as a "directional" hybrid image. The corresponding views are specified by `"motion"` and `"motion_res"`.
 
-### Triple Hybrids
+## Triple Hybrids
 
 The following command generates triple hybrids:
 
@@ -71,7 +71,7 @@ python generate.py --save_dir results --name triple_hybrid --prompts "a lithogra
 
 Triple hybrids are hybrid images, but with three different things in them. This is done by conditioning low, medium, and high frequency components of the image on different prompts by applying appropriate bandpasses. **Note, triple hybrids are quite hard to generate**, given how many things we are trying to put in a single image. The above command uses arguments that we found worked well (e.g. `--seed 7` and specific `sigma` values). Be aware that finding good triple hybrids may take a good amount of sifting through images.
 
-### Scaling Decomposition
+## Scaling Decomposition
 
 For the a scaling decomposition (see [paper](https://arxiv.org/abs/2404.11615) or [website](https://dangeng.github.io/factorized_diffusion/)), our method reduces exactly to various prior methods, depending on the choice of constants. **Note:** for these scaling decompositions, the `--guidance_scale` parameter must be set to `1.0`, otherwise the scaling will be incorrect.
 
@@ -107,7 +107,7 @@ and to use negative prompting run the following command:
 generate.py --save_dir results --name scale_negate_no_male_simple --prompts "a photo of a person" "female" --views scale scale --num_samples 8 --num_inference_steps 30 --guidance_scale 1.0 --generate_1024 --seed 0 --reduction sum --view_args 15.0 -14.0
 ```
 
-### Inverse Problems
+## Inverse Problems
 
 A special case of our method is if we fix one component (say, extracted from some reference image) while conditioning on another component. This gives us a way to solve inverse problems with a diffusion model, and has been studied in numerous works [[1]](https://arxiv.org/abs/2011.13456) [[2]](https://arxiv.org/abs/2112.05146) [[3]](https://arxiv.org/abs/2201.11793) [[4]](https://arxiv.org/abs/2201.09865) [[5]](https://arxiv.org/abs/2212.00490) [[6]](https://arxiv.org/abs/2108.02938) [[7]](https://arxiv.org/abs/2206.02779). Our contribution is (1) to show that our more general method reduces to (approximately) these approaches, and (2) to use it to generate hybrid images from existing images, which the following command does:
 
@@ -126,7 +126,7 @@ generate.py --save_dir results --name inverse_color --prompts "" "a photo of bir
 Here, the grayscale component comes from the `birds.png` image while the color component is generated conditioned on the text `"a photo of birds"`.
 
 
-### Animating
+## Animating
 
 The below decompositions should have animations implemented for them, and can be generated by using `animate.py`:
 
