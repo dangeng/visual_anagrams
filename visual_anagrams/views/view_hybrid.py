@@ -120,7 +120,7 @@ def compute_triple_bandpass(noise, sigma_1, sigma_2, kernel_size):
     return lp, mp, hp
 
 class TripleHybridLowPassView(BaseView):
-    def __init__(self, sigma_1=1, sigma_2=2, kernel_size=33):
+    def __init__(self, sigma_1=1, sigma_2=2, kernel_size=25):
         self.sigma_1 = sigma_1
         self.sigma_2 = sigma_2
         self.kernel_size = kernel_size
@@ -138,7 +138,7 @@ class TripleHybridLowPassView(BaseView):
         return noise
 
 class TripleHybridMediumPassView(BaseView):
-    def __init__(self, sigma_1=1, sigma_2=2, kernel_size=33):
+    def __init__(self, sigma_1=1, sigma_2=2, kernel_size=25):
         self.sigma_1 = sigma_1
         self.sigma_2 = sigma_2
         self.kernel_size = kernel_size
@@ -156,7 +156,7 @@ class TripleHybridMediumPassView(BaseView):
         return noise
 
 class TripleHybridHighPassView(BaseView):
-    def __init__(self, sigma_1=1, sigma_2=2, kernel_size=33):
+    def __init__(self, sigma_1=1, sigma_2=2, kernel_size=25):
         self.sigma_1 = sigma_1
         self.sigma_2 = sigma_2
         self.kernel_size = kernel_size
