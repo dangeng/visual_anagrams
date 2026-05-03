@@ -124,7 +124,7 @@ def sample_stage_1(model,
             noise_pred = noise_pred[:,i%num_prompts]
             predicted_variance = predicted_variance[:,i%num_prompts]
         else:
-            raise ValueError('Reduction must be either `mean` or `alternate`')
+            raise ValueError('Reduction must be either `mean`, `sum`, or `alternate`.')
         noise_pred = torch.cat([noise_pred, predicted_variance], dim=1)
 
         # compute the previous noisy sample x_t -> x_t-1
@@ -274,6 +274,8 @@ def sample_stage_2(model,
         elif reduction == 'alternate':
             noise_pred = noise_pred[:,i%num_prompts]
             predicted_variance = predicted_variance[:,i%num_prompts]
+        else:
+            raise ValueError('Reduction must be either `mean`, `sum`, or `alternate`.')
 
         noise_pred = torch.cat([noise_pred, predicted_variance], dim=1)
 
